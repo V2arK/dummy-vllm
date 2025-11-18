@@ -66,6 +66,7 @@ class ResponseBuilder:
                     "finish_reason": finish_reason,
                 }
             ],
+            "usage": None,
         }
 
     @staticmethod
@@ -111,6 +112,7 @@ class ResponseBuilder:
             "created": created,
             "model": model,
             "choices": [choice.model_dump()],
+            "usage": None,
         }
 
     @staticmethod
