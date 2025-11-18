@@ -6,30 +6,27 @@ without GPU inference noise.
 
 ## Quick Start
 
-1. Create a virtual environment and install dependencies:
+1. Build the container image:
    ```bash
-   python -m venv .venv
-   source .venv/bin/activate
-   pip install -r requirements.txt
+   docker build -t dummy-vllm .
    ```
-2. Launch the server with hot reload:
+2. Launch the server (exposes port 8000 by default):
    ```bash
-   ./run_server.sh
+   docker run --rm -p 8000:8000 dummy-vllm
    ```
 3. Send OpenAI-compatible requests against `http://localhost:8000`.
 
 ## Automation & Containers
 
-- Task runner: use `just` for repeatable workflows.
-  - `just install` — create/refresh the local virtual environment.
-  - `just test` — run the pytest suite with the correct `PYTHONPATH`.
-  - `just run` — start uvicorn with auto-reload for local development.
-  - `just docker-build target=dev` — build the multi-stage image (`dev` or `prod`).
-  - `just docker-run target=prod` — run the built image on port 8000.
+- Use `just` for recurring tasks (all commands operate inside the container image):
+  - `just build` — build the Docker image.
+  - `just run` — run the API on port 8000.
+  - `just test` — execute `pytest` within the container.
+  - `just shell` — open an interactive shell inside the image.
 
-- Container image: the root `Dockerfile` mirrors the platform API layout with `base`, `prod`,
-  and `dev` stages. `prod` runs `./run_server.sh` directly, while `dev` bundles extra tooling
-  for iterative work.
+- The root `Dockerfile` builds a lean Python 3.12 image, installs `requirements.txt`, copies the
+  repository, and executes `./run_server.sh`. No local virtual environment is required; run all
+  workflows via the container.
 
 ## API Surface
 
