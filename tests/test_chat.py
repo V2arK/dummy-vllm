@@ -24,6 +24,7 @@ def test_chat_completion(client: TestClient) -> None:
     payload = response.json()
     assert payload["object"] == "chat.completion"
     assert payload["choices"][0]["message"]["role"] == "assistant"
+    assert payload["choices"][0]["finish_reason"] in ("stop", "length")
     assert payload["usage"]["total_tokens"] >= 1
 
 
@@ -97,4 +98,50 @@ def test_chat_streaming_multiple_choices(client: TestClient) -> None:
             chunk = json.loads(data)
             indexes.add(chunk["choices"][0]["index"])
     assert indexes == {0, 1}
+
+
+def test_chat_completion_length_finish_reason(client: TestClient) -> None:
+    response = client.post(
+        "/v1/chat/completions",
+        json={
+            "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+            "messages": [
+                {"role": "user", "content": "truncate me"},
+            ],
+            "max_tokens": 1,
+            "stream": False,
+        },
+    )
+    assert response.status_code == 200
+    payload = response.json()
+    assert payload["choices"][0]["finish_reason"] == "length"
+
+
+def test_chat_streaming_length_finish_reason(client: TestClient) -> None:
+    final_chunk = None
+    with client.stream(
+        "POST",
+        "/v1/chat/completions",
+        json={
+            "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+            "messages": [
+                {"role": "user", "content": "truncate me"},
+            ],
+            "max_tokens": 1,
+            "stream": True,
+        },
+    ) as response:
+        assert response.status_code == 200
+        for raw_line in response.iter_lines():
+            if not raw_line:
+                continue
+            line = raw_line.decode("utf-8") if isinstance(raw_line, bytes) else raw_line
+            if not line.startswith("data: "):
+                continue
+            data = line[6:]
+            if data == "[DONE]":
+                break
+            final_chunk = json.loads(data)
+    assert final_chunk is not None
+    assert final_chunk["choices"][0]["finish_reason"] == "length"
 

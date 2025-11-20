@@ -37,10 +37,18 @@ async def create_chat_completion(
     choices: List[ChatCompletionChoice] = []
     total_completion_tokens = 0
     for index in range(request.n):
-        generated_text = DummyTextGenerator.generate_completion_text(max_tokens=request.max_tokens)
+        generated_text, truncated = DummyTextGenerator.generate_completion_with_metadata(
+            max_tokens=request.max_tokens
+        )
         completion_tokens = DummyTextGenerator.estimate_token_count(generated_text)
         total_completion_tokens += completion_tokens
-        choices.append(ResponseBuilder.chat_choice(index=index, content=generated_text, finish_reason="stop"))
+        choices.append(
+            ResponseBuilder.chat_choice(
+                index=index,
+                content=generated_text,
+                finish_reason="length" if truncated else "stop",
+            )
+        )
     response = ResponseBuilder.chat_response(
         model=request.model,
         choices=choices,
@@ -58,7 +66,8 @@ async def _streaming_chat_completion(request: ChatCompletionRequest) -> Streamin
         total_completion_tokens = 0
         try:
             for choice_index in range(request.n):
-                async for token in DummyTextGenerator.stream_tokens(max_tokens=request.max_tokens):
+                tokens, truncated = DummyTextGenerator.prepare_token_stream(max_tokens=request.max_tokens)
+                async for token in DummyTextGenerator.stream_from_tokens(tokens):
                     total_completion_tokens += 1
                     chunk = ResponseBuilder.chat_stream_chunk(
                         completion_id=completion_id,
@@ -73,7 +82,7 @@ async def _streaming_chat_completion(request: ChatCompletionRequest) -> Streamin
                     model=request.model,
                     choice_index=choice_index,
                     token_text="",
-                    finish_reason="stop",
+                    finish_reason="length" if truncated else "stop",
                 )
                 yield f"data: {json.dumps(final_chunk, ensure_ascii=False)}\n\n"
             yield "data: [DONE]\n\n"

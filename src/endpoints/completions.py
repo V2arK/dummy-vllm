@@ -35,14 +35,16 @@ async def create_completion(request: CompletionRequest) -> Union[CompletionRespo
         prompt_tokens = DummyTextGenerator.estimate_token_count(prompt_text)
         total_prompt_tokens += prompt_tokens
         for _ in range(request.n):
-            generated_text = DummyTextGenerator.generate_completion_text(max_tokens=request.max_tokens)
+            generated_text, truncated = DummyTextGenerator.generate_completion_with_metadata(
+                max_tokens=request.max_tokens
+            )
             completion_tokens = DummyTextGenerator.estimate_token_count(generated_text)
             total_completion_tokens += completion_tokens
             choices.append(
                 ResponseBuilder.completion_choice(
                     index=choice_index,
                     text=generated_text,
-                    finish_reason="stop",
+                    finish_reason="length" if truncated else "stop",
                 )
             )
             choice_index += 1
@@ -67,7 +69,8 @@ async def _streaming_completion(request: CompletionRequest, prompts: List[str]) 
         try:
             for _ in prompts:
                 for _ in range(request.n):
-                    async for token in DummyTextGenerator.stream_tokens(max_tokens=request.max_tokens):
+                    tokens, truncated = DummyTextGenerator.prepare_token_stream(max_tokens=request.max_tokens)
+                    async for token in DummyTextGenerator.stream_from_tokens(tokens):
                         total_completion_tokens += 1
                         chunk = ResponseBuilder.completion_stream_chunk(
                             completion_id=completion_id,
@@ -82,7 +85,7 @@ async def _streaming_completion(request: CompletionRequest, prompts: List[str]) 
                         model=request.model,
                         choice_index=choice_index,
                         token_text="",
-                        finish_reason="stop",
+                        finish_reason="length" if truncated else "stop",
                     )
                     yield f"data: {json.dumps(final_chunk, ensure_ascii=False)}\n\n"
                     choice_index += 1

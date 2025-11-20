@@ -3,7 +3,8 @@
 
 # Standard library imports
 import logging
-from typing import Any, Dict
+from contextlib import asynccontextmanager
+from typing import Any, Dict, AsyncIterator
 
 # Third-party imports
 import uvicorn
@@ -20,12 +21,35 @@ from src.utils.metrics import metrics_collector
 logger = logging.getLogger(__name__)
 
 
+@asynccontextmanager
+async def _lifespan(app: FastAPI) -> AsyncIterator[None]:
+    if settings.enable_grpc:
+        server, bound_port = build_grpc_server(
+            host=settings.grpc_host,
+            port=settings.grpc_port,
+        )
+        await server.start()
+        app.state.grpc_server = server
+        app.state.grpc_port = bound_port
+        logger.info("gRPC server listening on %s:%s", settings.grpc_host, bound_port)
+    else:
+        app.state.grpc_server = None
+    try:
+        yield
+    finally:
+        server = getattr(app.state, "grpc_server", None)
+        if server is not None:
+            await server.stop(grace=1.0)
+            app.state.grpc_server = None
+
+
 def create_app() -> FastAPI:
     """Instantiate the FastAPI application."""
     app = FastAPI(
         title="Dummy vLLM Backend",
         description="High-throughput mock backend for FIB performance testing.",
         version="1.0.0",
+        lifespan=_lifespan,
     )
 
     app.add_middleware(
@@ -52,27 +76,6 @@ def create_app() -> FastAPI:
             "requests_by_endpoint": snapshot.requests_by_endpoint,
             "total_tokens_generated": snapshot.total_tokens_generated,
         }
-
-    @app.on_event("startup")
-    async def start_grpc_server() -> None:
-        if not settings.enable_grpc:
-            return
-        server, bound_port = build_grpc_server(
-            host=settings.grpc_host,
-            port=settings.grpc_port,
-        )
-        await server.start()
-        app.state.grpc_server = server
-        app.state.grpc_port = bound_port
-        logger.info("gRPC server listening on %s:%s", settings.grpc_host, bound_port)
-
-    @app.on_event("shutdown")
-    async def stop_grpc_server() -> None:
-        server = getattr(app.state, "grpc_server", None)
-        if server is None:
-            return
-        await server.stop(grace=1.0)
-        app.state.grpc_server = None
 
     return app
 
