@@ -5,11 +5,17 @@
 from __future__ import annotations
 
 import asyncio
+import pathlib
+import sys
 
 # Third-party imports
 import grpc
 
 # Local/application imports
+PROJECT_ROOT = pathlib.Path(__file__).resolve().parents[1]
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
+
 from src.grpc_service.proto import openai_pb2, openai_pb2_grpc
 
 
