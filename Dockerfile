@@ -21,7 +21,7 @@ COPY . /app
 RUN chmod +x /app/run_server.sh
 
 ENV PYTHONPATH="/app"
-EXPOSE 8000
+EXPOSE 8000 9000
 
 CMD ["./run_server.sh"]
 

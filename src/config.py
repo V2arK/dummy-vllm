@@ -28,17 +28,31 @@ def _int_from_env(name: str, default: int) -> int:
         return default
 
 
+def _bool_from_env(name: str, default: bool) -> bool:
+    """Retrieve a boolean environment variable with graceful fallback."""
+    raw_value = os.getenv(name)
+    if raw_value is None:
+        return default
+    return raw_value.lower() in {"1", "true", "yes", "on"}
+
+
+_DEFAULT_HOST = os.getenv("DUMMY_VLLM_HOST", "0.0.0.0")
+
+
 @dataclass(frozen=True)
 class ServerSettings:
     """Configuration values populated from environment variables."""
 
-    host: str = os.getenv("DUMMY_VLLM_HOST", "0.0.0.0")
+    host: str = _DEFAULT_HOST
     port: int = _int_from_env("DUMMY_VLLM_PORT", 8000)
     log_level: str = os.getenv("DUMMY_VLLM_LOG_LEVEL", "info")
     ttft_delay_seconds: float = _float_from_env("DUMMY_VLLM_TTFT_DELAY", 0.0)
     token_delay_seconds: float = _float_from_env("DUMMY_VLLM_TOKEN_DELAY", 0.0)
     token_delay_jitter_seconds: float = _float_from_env("DUMMY_VLLM_TOKEN_DELAY_JITTER", 0.0)
     default_model_name: str = os.getenv("DUMMY_VLLM_MODEL", "Qwen/Qwen2.5-VL-7B-Instruct")
+    grpc_host: str = os.getenv("DUMMY_VLLM_GRPC_HOST", _DEFAULT_HOST)
+    grpc_port: int = _int_from_env("DUMMY_VLLM_GRPC_PORT", 9000)
+    enable_grpc: bool = _bool_from_env("DUMMY_VLLM_ENABLE_GRPC", True)
 
 
 settings = ServerSettings()

@@ -6,4 +6,7 @@ default_model_name: Qwen/Qwen2.5-VL-7B-Instruct
 ttft_delay_seconds: 0.0
 token_delay_seconds: 0.0
 token_delay_jitter_seconds: 0.0
+grpc_host: 0.0.0.0
+grpc_port: 9000
+enable_grpc: true
 

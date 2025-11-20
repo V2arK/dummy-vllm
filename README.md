@@ -10,9 +10,9 @@ without GPU inference noise.
    ```bash
    docker build -t dummy-vllm .
    ```
-2. Launch the server (exposes port 8000 by default):
+2. Launch the server (HTTP on `8000`, gRPC on `9000`):
    ```bash
-   docker run --rm -p 8000:8000 dummy-vllm
+   docker run --rm -p 8000:8000 -p 9000:9000 dummy-vllm
    ```
 3. Send OpenAI-compatible requests against `http://localhost:8000`.
 
@@ -20,7 +20,7 @@ without GPU inference noise.
 
 - Use `just` for recurring tasks (all commands operate inside the container image):
   - `just build` — build the Docker image.
-  - `just run` — run the API on port 8000.
+  - `just run` — run the container with both HTTP (8000) and gRPC (9000) exposed.
   - `just test` — execute `pytest` within the container.
   - `just shell` — open an interactive shell inside the image.
 
@@ -49,6 +49,22 @@ All knobs are available as environment variables (see `src/config.py` for defaul
 | `DUMMY_VLLM_TTFT_DELAY` | Optional artificial delay before the first streamed token. |
 | `DUMMY_VLLM_TOKEN_DELAY` | Optional per-token delay for streaming responses. |
 | `DUMMY_VLLM_TOKEN_DELAY_JITTER` | Jitter range added to the token delay. |
+| `DUMMY_VLLM_ENABLE_GRPC` | Toggle the gRPC server (default `true`). |
+| `DUMMY_VLLM_GRPC_HOST` | Bind address for the gRPC server (defaults to `DUMMY_VLLM_HOST`). |
+| `DUMMY_VLLM_GRPC_PORT` | gRPC listen port (default `9000`). |
+
+## gRPC Interface
+
+The container now exposes the same functionality via gRPC using the OpenAI-compatible
+`VLLMService` proto (see `src/grpc_service/proto/openai.proto`). Available RPCs:
+
+- `Completion` / `CompletionStream`
+- `ChatCompletion` / `ChatCompletionStream`
+- `ListModels`, `GetModelInfo`
+- Health checks: `ServerLive`, `ServerReady`, `ModelReady`
+
+Clients can point to `localhost:9000` by default; disable the gRPC server entirely by
+setting `DUMMY_VLLM_ENABLE_GRPC=false`.
 
 ## Testing
 
