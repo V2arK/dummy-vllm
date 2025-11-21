@@ -4,6 +4,7 @@
 # Standard library imports
 from __future__ import annotations
 
+import logging
 import time
 from typing import AsyncIterator, Iterable, List, Tuple
 
@@ -25,6 +26,8 @@ from src.models import (
     CompletionResponse,
 )
 from src.utils.metrics import metrics_collector
+
+logger = logging.getLogger(__name__)
 
 
 class DummyGrpcServicer(openai_pb2_grpc.VLLMServiceServicer):
@@ -111,6 +114,8 @@ class DummyGrpcServicer(openai_pb2_grpc.VLLMServiceServicer):
         request: openai_pb2.ChatCompletionRequest,
         context: aio.ServicerContext,
     ) -> openai_pb2.ChatCompletionResponse:
+        peer = context.peer()
+        logger.info(f"{peer} - gRPC ChatCompletion - model: {request.model or self._model_name}")
         del context
         chat_request = converters.chat_request_from_proto(
             request,
@@ -129,6 +134,8 @@ class DummyGrpcServicer(openai_pb2_grpc.VLLMServiceServicer):
         request: openai_pb2.ChatCompletionRequest,
         context: aio.ServicerContext,
     ) -> AsyncIterator[openai_pb2.ChatCompletionChunk]:
+        peer = context.peer()
+        logger.info(f"{peer} - gRPC ChatCompletionStream - model: {request.model or self._model_name}")
         del context
         chat_request = converters.chat_request_from_proto(
             request,
@@ -155,6 +162,8 @@ class DummyGrpcServicer(openai_pb2_grpc.VLLMServiceServicer):
         request: openai_pb2.CompletionRequest,
         context: aio.ServicerContext,
     ) -> openai_pb2.CompletionResponse:
+        peer = context.peer()
+        logger.info(f"{peer} - gRPC Completion - model: {request.model or self._model_name}")
         del context
         completion_request = converters.completion_request_from_proto(
             request,
@@ -173,6 +182,8 @@ class DummyGrpcServicer(openai_pb2_grpc.VLLMServiceServicer):
         request: openai_pb2.CompletionRequest,
         context: aio.ServicerContext,
     ) -> AsyncIterator[openai_pb2.CompletionChunk]:
+        peer = context.peer()
+        logger.info(f"{peer} - gRPC CompletionStream - model: {request.model or self._model_name}")
         del context
         completion_request = converters.completion_request_from_proto(
             request,

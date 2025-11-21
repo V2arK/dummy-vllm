@@ -17,6 +17,11 @@ from src.endpoints import chat, completions, models
 from src.grpc_service.server import build_grpc_server
 from src.utils.metrics import metrics_collector
 
+# Configure logging at module level to ensure it works with uvicorn reload
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(levelname)s:     %(name)s - %(message)s",
+)
 
 logger = logging.getLogger(__name__)
 
