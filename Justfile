@@ -19,5 +19,5 @@ shell:
     docker run --rm -it {{DOCKER_IMAGE}} /bin/bash
 
 clean:
-    docker rmi {{DOCKER_IMAGE}} || true
+    docker rm {{DOCKER_IMAGE}} --force || true; docker rmi {{DOCKER_IMAGE}} || true
 
