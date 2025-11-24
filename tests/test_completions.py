@@ -137,4 +137,3 @@ def test_streaming_completion_length_finish_reason(client: TestClient) -> None:
             final_chunk = json.loads(data)
     assert final_chunk is not None
     assert final_chunk["choices"][0]["finish_reason"] == "length"
-

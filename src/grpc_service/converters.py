@@ -34,7 +34,9 @@ def chat_request_from_proto(
     payload: Dict[str, Any] = {
         "model": grpc_request.model or default_model,
         "messages": [
-            ChatCompletionMessage(role=message.role or "user", content=message.content or "")
+            ChatCompletionMessage(
+                role=message.role or "user", content=message.content or ""
+            )
             for message in grpc_request.messages
         ],
     }
@@ -95,7 +97,9 @@ def completion_request_from_proto(
     return CompletionRequest.model_validate(payload)
 
 
-def completion_response_to_proto(response: CompletionResponse) -> openai_pb2.CompletionResponse:
+def completion_response_to_proto(
+    response: CompletionResponse,
+) -> openai_pb2.CompletionResponse:
     proto = openai_pb2.CompletionResponse(
         id=response.id,
         object=response.object,
@@ -113,7 +117,9 @@ def completion_response_to_proto(response: CompletionResponse) -> openai_pb2.Com
     return proto
 
 
-def chat_response_to_proto(response: ChatCompletionResponse) -> openai_pb2.ChatCompletionResponse:
+def chat_response_to_proto(
+    response: ChatCompletionResponse,
+) -> openai_pb2.ChatCompletionResponse:
     proto = openai_pb2.ChatCompletionResponse(
         id=response.id,
         object=response.object,
@@ -180,5 +186,3 @@ def _populate_usage(proto_usage: openai_pb2.Usage, usage: CompletionUsage) -> No
     proto_usage.prompt_tokens = usage.prompt_tokens
     proto_usage.completion_tokens = usage.completion_tokens
     proto_usage.total_tokens = usage.total_tokens
-
-

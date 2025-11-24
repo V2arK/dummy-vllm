@@ -120,11 +120,18 @@ class ResponseBuilder:
         return f"cmpl-{uuid.uuid4().hex[:24]}"
 
     @staticmethod
-    def completion_choice(index: int, text: str, finish_reason: Optional[str]) -> CompletionChoice:
-        return CompletionChoice(index=index, text=text, logprobs=None, finish_reason=finish_reason)
+    def completion_choice(
+        index: int, text: str, finish_reason: Optional[str]
+    ) -> CompletionChoice:
+        return CompletionChoice(
+            index=index, text=text, logprobs=None, finish_reason=finish_reason
+        )
 
     @staticmethod
-    def chat_choice(index: int, content: str, finish_reason: Optional[str]) -> ChatCompletionChoice:
+    def chat_choice(
+        index: int, content: str, finish_reason: Optional[str]
+    ) -> ChatCompletionChoice:
         message = ChatCompletionMessage(role="assistant", content=content)
-        return ChatCompletionChoice(index=index, message=message, finish_reason=finish_reason)
-
+        return ChatCompletionChoice(
+            index=index, message=message, finish_reason=finish_reason
+        )

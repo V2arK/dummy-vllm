@@ -95,6 +95,7 @@ class DummyTextGenerator:
         base_delay = settings.token_delay_seconds
         if base_delay <= 0.0:
             return 0.0
-        jitter = random.uniform(-settings.token_delay_jitter_seconds, settings.token_delay_jitter_seconds)
+        jitter = random.uniform(
+            -settings.token_delay_jitter_seconds, settings.token_delay_jitter_seconds
+        )
         return max(0.0, base_delay + jitter)
-

@@ -45,4 +45,3 @@ class MetricsCollector:
 
 
 metrics_collector = MetricsCollector()
-

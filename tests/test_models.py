@@ -11,4 +11,3 @@ def test_list_models(client: TestClient) -> None:
     payload = response.json()
     assert payload["object"] == "list"
     assert len(payload["data"]) >= 1
-

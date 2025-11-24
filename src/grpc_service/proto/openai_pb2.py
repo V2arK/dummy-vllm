@@ -4,124 +4,133 @@
 # source: openai.proto
 # Protobuf Python Version: 5.27.2
 """Generated protocol buffer code."""
+
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import descriptor_pool as _descriptor_pool
 from google.protobuf import runtime_version as _runtime_version
 from google.protobuf import symbol_database as _symbol_database
 from google.protobuf.internal import builder as _builder
+
 _runtime_version.ValidateProtobufRuntimeVersion(
-    _runtime_version.Domain.PUBLIC,
-    5,
-    27,
-    2,
-    '',
-    'openai.proto'
+    _runtime_version.Domain.PUBLIC, 5, 27, 2, "", "openai.proto"
 )
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
 
 
-
-
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0copenai.proto\x12\x0evllm.openai.v1\"\x13\n\x11ServerLiveRequest\"\"\n\x12ServerLiveResponse\x12\x0c\n\x04live\x18\x01 \x01(\x08\"\x14\n\x12ServerReadyRequest\"$\n\x13ServerReadyResponse\x12\r\n\x05ready\x18\x01 \x01(\x08\"!\n\x11ModelReadyRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\"1\n\x12ModelReadyResponse\x12\r\n\x05ready\x18\x01 \x01(\x08\x12\x0c\n\x04name\x18\x02 \x01(\t\"\x13\n\x11ListModelsRequest\"M\n\x12ListModelsResponse\x12\x0e\n\x06object\x18\x01 \x01(\t\x12\'\n\x04\x64\x61ta\x18\x02 \x03(\x0b\x32\x19.vllm.openai.v1.ModelInfo\"!\n\x13GetModelInfoRequest\x12\n\n\x02id\x18\x01 \x01(\t\"p\n\tModelInfo\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0e\n\x06object\x18\x02 \x01(\t\x12\x0f\n\x07\x63reated\x18\x03 \x01(\x03\x12\x10\n\x08owned_by\x18\x04 \x01(\t\x12\x15\n\rmax_model_len\x18\n \x01(\x05\x12\r\n\x05\x64type\x18\x0b \x01(\t\"\xd7\x07\n\x15\x43hatCompletionRequest\x12\r\n\x05model\x18\x01 \x01(\t\x12-\n\x08messages\x18\x02 \x03(\x0b\x32\x1b.vllm.openai.v1.ChatMessage\x12\x18\n\x0btemperature\x18\x03 \x01(\x02H\x00\x88\x01\x01\x12\x12\n\x05top_p\x18\x04 \x01(\x02H\x01\x88\x01\x01\x12\x0e\n\x01n\x18\x05 \x01(\x05H\x02\x88\x01\x01\x12\x17\n\nmax_tokens\x18\x06 \x01(\x05H\x03\x88\x01\x01\x12\x0c\n\x04stop\x18\x07 \x03(\t\x12\x13\n\x06stream\x18\x08 \x01(\x08H\x04\x88\x01\x01\x12\x1d\n\x10presence_penalty\x18\n \x01(\x02H\x05\x88\x01\x01\x12\x1e\n\x11\x66requency_penalty\x18\x0b \x01(\x02H\x06\x88\x01\x01\x12H\n\nlogit_bias\x18\x0c \x03(\x0b\x32\x34.vllm.openai.v1.ChatCompletionRequest.LogitBiasEntry\x12\x11\n\x04user\x18\x0f \x01(\tH\x07\x88\x01\x01\x12\x14\n\x07\x62\x65st_of\x18\x14 \x01(\x05H\x08\x88\x01\x01\x12\x1c\n\x0fuse_beam_search\x18\x15 \x01(\x08H\t\x88\x01\x01\x12\x12\n\x05top_k\x18\x16 \x01(\x05H\n\x88\x01\x01\x12\x12\n\x05min_p\x18\x17 \x01(\x02H\x0b\x88\x01\x01\x12\x1f\n\x12repetition_penalty\x18\x18 \x01(\x02H\x0c\x88\x01\x01\x12\x1b\n\x0elength_penalty\x18\x19 \x01(\x02H\r\x88\x01\x01\x12\x11\n\x04\x65\x63ho\x18\x1a \x01(\x08H\x0e\x88\x01\x01\x12\x11\n\x04seed\x18\x1b \x01(\x05H\x0f\x88\x01\x01\x12\x15\n\x08logprobs\x18\x1c \x01(\x08H\x10\x88\x01\x01\x12\x19\n\x0ctop_logprobs\x18\x1d \x01(\x05H\x11\x88\x01\x01\x12\x17\n\nrequest_id\x18\x32 \x01(\tH\x12\x88\x01\x01\x12\x15\n\x08priority\x18\x33 \x01(\x05H\x13\x88\x01\x01\x1a\x30\n\x0eLogitBiasEntry\x12\x0b\n\x03key\x18\x01 \x01(\x05\x12\r\n\x05value\x18\x02 \x01(\x02:\x02\x38\x01\x42\x0e\n\x0c_temperatureB\x08\n\x06_top_pB\x04\n\x02_nB\r\n\x0b_max_tokensB\t\n\x07_streamB\x13\n\x11_presence_penaltyB\x14\n\x12_frequency_penaltyB\x07\n\x05_userB\n\n\x08_best_ofB\x12\n\x10_use_beam_searchB\x08\n\x06_top_kB\x08\n\x06_min_pB\x15\n\x13_repetition_penaltyB\x11\n\x0f_length_penaltyB\x07\n\x05_echoB\x07\n\x05_seedB\x0b\n\t_logprobsB\x0f\n\r_top_logprobsB\r\n\x0b_request_idB\x0b\n\t_priority\"\xa2\x01\n\x0b\x43hatMessage\x12\x0c\n\x04role\x18\x01 \x01(\t\x12\x0f\n\x07\x63ontent\x18\x02 \x01(\t\x12\x11\n\x04name\x18\x03 \x01(\tH\x00\x88\x01\x01\x12,\n\ntool_calls\x18\n \x03(\x0b\x32\x18.vllm.openai.v1.ToolCall\x12\x19\n\x0ctool_call_id\x18\x0b \x01(\tH\x01\x88\x01\x01\x42\x07\n\x05_nameB\x0f\n\r_tool_call_id\"T\n\x08ToolCall\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0c\n\x04type\x18\x02 \x01(\t\x12.\n\x08\x66unction\x18\x03 \x01(\x0b\x32\x1c.vllm.openai.v1.FunctionCall\"/\n\x0c\x46unctionCall\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x11\n\targuments\x18\x02 \x01(\t\"\x8b\x02\n\x16\x43hatCompletionResponse\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0e\n\x06object\x18\x02 \x01(\t\x12\x0f\n\x07\x63reated\x18\x03 \x01(\x03\x12\r\n\x05model\x18\x04 \x01(\t\x12+\n\x07\x63hoices\x18\x05 \x03(\x0b\x32\x1a.vllm.openai.v1.ChatChoice\x12$\n\x05usage\x18\x06 \x01(\x0b\x32\x15.vllm.openai.v1.Usage\x12\x1f\n\x12system_fingerprint\x18\x07 \x01(\tH\x00\x88\x01\x01\x12\x19\n\x0cservice_tier\x18\x08 \x01(\tH\x01\x88\x01\x01\x42\x15\n\x13_system_fingerprintB\x0f\n\r_service_tier\"\xdc\x01\n\nChatChoice\x12\r\n\x05index\x18\x01 \x01(\x05\x12,\n\x07message\x18\x02 \x01(\x0b\x32\x1b.vllm.openai.v1.ChatMessage\x12\x33\n\x08logprobs\x18\x03 \x01(\x0b\x32\x1c.vllm.openai.v1.ChatLogprobsH\x00\x88\x01\x01\x12\x15\n\rfinish_reason\x18\x04 \x01(\t\x12 \n\x13stop_sequence_index\x18\x05 \x01(\x05H\x01\x88\x01\x01\x42\x0b\n\t_logprobsB\x16\n\x14_stop_sequence_index\"<\n\x0c\x43hatLogprobs\x12,\n\x07\x63ontent\x18\x01 \x03(\x0b\x32\x1b.vllm.openai.v1.ChatLogprob\"t\n\x0b\x43hatLogprob\x12\r\n\x05token\x18\x01 \x01(\t\x12\x0f\n\x07logprob\x18\x02 \x01(\x01\x12\x13\n\x0btoken_bytes\x18\x03 \x03(\x05\x12\x30\n\x0ctop_logprobs\x18\x04 \x03(\x0b\x32\x1a.vllm.openai.v1.TopLogprob\"A\n\nTopLogprob\x12\r\n\x05token\x18\x01 \x01(\t\x12\x0f\n\x07logprob\x18\x02 \x01(\x01\x12\x13\n\x0btoken_bytes\x18\x03 \x03(\x05\"\xb8\x01\n\x13\x43hatCompletionChunk\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0e\n\x06object\x18\x02 \x01(\t\x12\x0f\n\x07\x63reated\x18\x03 \x01(\x03\x12\r\n\x05model\x18\x04 \x01(\t\x12\x30\n\x07\x63hoices\x18\x05 \x03(\x0b\x32\x1f.vllm.openai.v1.ChatChunkChoice\x12)\n\x05usage\x18\x06 \x01(\x0b\x32\x15.vllm.openai.v1.UsageH\x00\x88\x01\x01\x42\x08\n\x06_usage\"\xba\x01\n\x0f\x43hatChunkChoice\x12\r\n\x05index\x18\x01 \x01(\x05\x12(\n\x05\x64\x65lta\x18\x02 \x01(\x0b\x32\x19.vllm.openai.v1.ChatDelta\x12\x33\n\x08logprobs\x18\x03 \x01(\x0b\x32\x1c.vllm.openai.v1.ChatLogprobsH\x00\x88\x01\x01\x12\x1a\n\rfinish_reason\x18\x04 \x01(\tH\x01\x88\x01\x01\x42\x0b\n\t_logprobsB\x10\n\x0e_finish_reason\"\xb2\x01\n\tChatDelta\x12\x11\n\x04role\x18\x01 \x01(\tH\x00\x88\x01\x01\x12\x14\n\x07\x63ontent\x18\x02 \x01(\tH\x01\x88\x01\x01\x12\x31\n\ntool_calls\x18\x03 \x03(\x0b\x32\x1d.vllm.openai.v1.ToolCallDelta\x12\x1e\n\x11reasoning_content\x18\x04 \x01(\tH\x02\x88\x01\x01\x42\x07\n\x05_roleB\n\n\x08_contentB\x14\n\x12_reasoning_content\"\x96\x01\n\rToolCallDelta\x12\x0f\n\x02id\x18\x01 \x01(\tH\x00\x88\x01\x01\x12\x11\n\x04type\x18\x02 \x01(\tH\x01\x88\x01\x01\x12\x33\n\x08\x66unction\x18\x03 \x01(\x0b\x32!.vllm.openai.v1.FunctionCallDelta\x12\x12\n\x05index\x18\x04 \x01(\x05H\x02\x88\x01\x01\x42\x05\n\x03_idB\x07\n\x05_typeB\x08\n\x06_index\"U\n\x11\x46unctionCallDelta\x12\x11\n\x04name\x18\x01 \x01(\tH\x00\x88\x01\x01\x12\x16\n\targuments\x18\x02 \x01(\tH\x01\x88\x01\x01\x42\x07\n\x05_nameB\x0c\n\n_arguments\"\x90\x07\n\x11\x43ompletionRequest\x12\r\n\x05model\x18\x01 \x01(\t\x12\x10\n\x06prompt\x18\x02 \x01(\tH\x00\x12-\n\x07prompts\x18\x03 \x01(\x0b\x32\x1a.vllm.openai.v1.PromptListH\x00\x12\x18\n\x0btemperature\x18\n \x01(\x02H\x01\x88\x01\x01\x12\x12\n\x05top_p\x18\x0b \x01(\x02H\x02\x88\x01\x01\x12\x0e\n\x01n\x18\x0c \x01(\x05H\x03\x88\x01\x01\x12\x17\n\nmax_tokens\x18\r \x01(\x05H\x04\x88\x01\x01\x12\x0c\n\x04stop\x18\x0e \x03(\t\x12\x13\n\x06stream\x18\x0f \x01(\x08H\x05\x88\x01\x01\x12\x13\n\x06suffix\x18\x14 \x01(\tH\x06\x88\x01\x01\x12\x1d\n\x10presence_penalty\x18\x15 \x01(\x02H\x07\x88\x01\x01\x12\x1e\n\x11\x66requency_penalty\x18\x16 \x01(\x02H\x08\x88\x01\x01\x12\x14\n\x07\x62\x65st_of\x18\x17 \x01(\x05H\t\x88\x01\x01\x12\x44\n\nlogit_bias\x18\x18 \x03(\x0b\x32\x30.vllm.openai.v1.CompletionRequest.LogitBiasEntry\x12\x11\n\x04user\x18\x19 \x01(\tH\n\x88\x01\x01\x12\x11\n\x04\x65\x63ho\x18\x1a \x01(\x08H\x0b\x88\x01\x01\x12\x15\n\x08logprobs\x18\x1b \x01(\x08H\x0c\x88\x01\x01\x12\x19\n\x0ctop_logprobs\x18\x1c \x01(\x05H\r\x88\x01\x01\x12\x12\n\x05top_k\x18( \x01(\x05H\x0e\x88\x01\x01\x12\x1f\n\x12repetition_penalty\x18) \x01(\x02H\x0f\x88\x01\x01\x12\x11\n\x04seed\x18* \x01(\x05H\x10\x88\x01\x01\x12\x17\n\nrequest_id\x18\x32 \x01(\tH\x11\x88\x01\x01\x12\x15\n\x08priority\x18\x33 \x01(\x05H\x12\x88\x01\x01\x1a\x30\n\x0eLogitBiasEntry\x12\x0b\n\x03key\x18\x01 \x01(\x05\x12\r\n\x05value\x18\x02 \x01(\x02:\x02\x38\x01\x42\r\n\x0bprompt_typeB\x0e\n\x0c_temperatureB\x08\n\x06_top_pB\x04\n\x02_nB\r\n\x0b_max_tokensB\t\n\x07_streamB\t\n\x07_suffixB\x13\n\x11_presence_penaltyB\x14\n\x12_frequency_penaltyB\n\n\x08_best_ofB\x07\n\x05_userB\x07\n\x05_echoB\x0b\n\t_logprobsB\x0f\n\r_top_logprobsB\x08\n\x06_top_kB\x15\n\x13_repetition_penaltyB\x07\n\x05_seedB\r\n\x0b_request_idB\x0b\n\t_priority\"\x1c\n\nPromptList\x12\x0e\n\x06values\x18\x01 \x03(\t\"\xe1\x01\n\x12\x43ompletionResponse\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0e\n\x06object\x18\x02 \x01(\t\x12\x0f\n\x07\x63reated\x18\x03 \x01(\x03\x12\r\n\x05model\x18\x04 \x01(\t\x12\x31\n\x07\x63hoices\x18\x05 \x03(\x0b\x32 .vllm.openai.v1.CompletionChoice\x12$\n\x05usage\x18\x06 \x01(\x0b\x32\x15.vllm.openai.v1.Usage\x12\x1f\n\x12system_fingerprint\x18\x07 \x01(\tH\x00\x88\x01\x01\x42\x15\n\x13_system_fingerprint\"\xe5\x01\n\x10\x43ompletionChoice\x12\x0c\n\x04text\x18\x01 \x01(\t\x12\r\n\x05index\x18\x02 \x01(\x05\x12\x39\n\x08logprobs\x18\x03 \x01(\x0b\x32\".vllm.openai.v1.CompletionLogprobsH\x00\x88\x01\x01\x12\x15\n\rfinish_reason\x18\x04 \x01(\t\x12\x18\n\x0bstop_reason\x18\x05 \x01(\tH\x01\x88\x01\x01\x12\x11\n\ttoken_ids\x18\x06 \x03(\x05\x12\x18\n\x10prompt_token_ids\x18\x07 \x03(\x05\x42\x0b\n\t_logprobsB\x0e\n\x0c_stop_reason\"\x84\x01\n\x12\x43ompletionLogprobs\x12\x13\n\x0btext_offset\x18\x01 \x03(\x05\x12\x16\n\x0etoken_logprobs\x18\x02 \x03(\x01\x12\x0e\n\x06tokens\x18\x03 \x03(\t\x12\x31\n\x0ctop_logprobs\x18\x04 \x03(\x0b\x32\x1b.vllm.openai.v1.TopLogprobs\"\x85\x01\n\x0bTopLogprobs\x12\x42\n\x0ctop_logprobs\x18\x01 \x03(\x0b\x32,.vllm.openai.v1.TopLogprobs.TopLogprobsEntry\x1a\x32\n\x10TopLogprobsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x01:\x02\x38\x01\"\xba\x01\n\x0f\x43ompletionChunk\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0e\n\x06object\x18\x02 \x01(\t\x12\x0f\n\x07\x63reated\x18\x03 \x01(\x03\x12\r\n\x05model\x18\x04 \x01(\t\x12\x36\n\x07\x63hoices\x18\x05 \x03(\x0b\x32%.vllm.openai.v1.CompletionChunkChoice\x12)\n\x05usage\x18\x06 \x01(\x0b\x32\x15.vllm.openai.v1.UsageH\x00\x88\x01\x01\x42\x08\n\x06_usage\"\x81\x02\n\x15\x43ompletionChunkChoice\x12\r\n\x05index\x18\x01 \x01(\x05\x12\x0c\n\x04text\x18\x02 \x01(\t\x12\x39\n\x08logprobs\x18\x03 \x01(\x0b\x32\".vllm.openai.v1.CompletionLogprobsH\x00\x88\x01\x01\x12\x1a\n\rfinish_reason\x18\x04 \x01(\tH\x01\x88\x01\x01\x12\x18\n\x0bstop_reason\x18\x05 \x01(\tH\x02\x88\x01\x01\x12\x11\n\ttoken_ids\x18\x06 \x03(\x05\x12\x18\n\x10prompt_token_ids\x18\x07 \x03(\x05\x42\x0b\n\t_logprobsB\x10\n\x0e_finish_reasonB\x0e\n\x0c_stop_reason\"\xb2\x01\n\x05Usage\x12\x15\n\rprompt_tokens\x18\x01 \x01(\x05\x12\x19\n\x11\x63ompletion_tokens\x18\x02 \x01(\x05\x12\x14\n\x0ctotal_tokens\x18\x03 \x01(\x05\x12G\n\x15prompt_tokens_details\x18\x04 \x01(\x0b\x32#.vllm.openai.v1.PromptTokensDetailsH\x00\x88\x01\x01\x42\x18\n\x16_prompt_tokens_details\"C\n\x13PromptTokensDetails\x12\x1a\n\rcached_tokens\x18\x01 \x01(\x05H\x00\x88\x01\x01\x42\x10\n\x0e_cached_tokens2\xcb\x06\n\x0bVLLMService\x12X\n\nServerLive\x12!.vllm.openai.v1.ServerLiveRequest\x1a\".vllm.openai.v1.ServerLiveResponse\"\x03\x90\x02\x01\x12[\n\x0bServerReady\x12\".vllm.openai.v1.ServerReadyRequest\x1a#.vllm.openai.v1.ServerReadyResponse\"\x03\x90\x02\x01\x12X\n\nModelReady\x12!.vllm.openai.v1.ModelReadyRequest\x1a\".vllm.openai.v1.ModelReadyResponse\"\x03\x90\x02\x01\x12X\n\nListModels\x12!.vllm.openai.v1.ListModelsRequest\x1a\".vllm.openai.v1.ListModelsResponse\"\x03\x90\x02\x01\x12S\n\x0cGetModelInfo\x12#.vllm.openai.v1.GetModelInfoRequest\x1a\x19.vllm.openai.v1.ModelInfo\"\x03\x90\x02\x01\x12\x61\n\x0e\x43hatCompletion\x12%.vllm.openai.v1.ChatCompletionRequest\x1a&.vllm.openai.v1.ChatCompletionResponse\"\x00\x12\x66\n\x14\x43hatCompletionStream\x12%.vllm.openai.v1.ChatCompletionRequest\x1a#.vllm.openai.v1.ChatCompletionChunk\"\x00\x30\x01\x12U\n\nCompletion\x12!.vllm.openai.v1.CompletionRequest\x1a\".vllm.openai.v1.CompletionResponse\"\x00\x12Z\n\x10\x43ompletionStream\x12!.vllm.openai.v1.CompletionRequest\x1a\x1f.vllm.openai.v1.CompletionChunk\"\x00\x30\x01\x42W\n\x16\x61i.vllm.grpc.openai.v1P\x01Z;github.com/vllm-project/vllm-grpc/gen/go/openai/v1;openaiv1b\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(
+    b'\n\x0copenai.proto\x12\x0evllm.openai.v1"\x13\n\x11ServerLiveRequest""\n\x12ServerLiveResponse\x12\x0c\n\x04live\x18\x01 \x01(\x08"\x14\n\x12ServerReadyRequest"$\n\x13ServerReadyResponse\x12\r\n\x05ready\x18\x01 \x01(\x08"!\n\x11ModelReadyRequest\x12\x0c\n\x04name\x18\x01 \x01(\t"1\n\x12ModelReadyResponse\x12\r\n\x05ready\x18\x01 \x01(\x08\x12\x0c\n\x04name\x18\x02 \x01(\t"\x13\n\x11ListModelsRequest"M\n\x12ListModelsResponse\x12\x0e\n\x06object\x18\x01 \x01(\t\x12\'\n\x04\x64\x61ta\x18\x02 \x03(\x0b\x32\x19.vllm.openai.v1.ModelInfo"!\n\x13GetModelInfoRequest\x12\n\n\x02id\x18\x01 \x01(\t"p\n\tModelInfo\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0e\n\x06object\x18\x02 \x01(\t\x12\x0f\n\x07\x63reated\x18\x03 \x01(\x03\x12\x10\n\x08owned_by\x18\x04 \x01(\t\x12\x15\n\rmax_model_len\x18\n \x01(\x05\x12\r\n\x05\x64type\x18\x0b \x01(\t"\xd7\x07\n\x15\x43hatCompletionRequest\x12\r\n\x05model\x18\x01 \x01(\t\x12-\n\x08messages\x18\x02 \x03(\x0b\x32\x1b.vllm.openai.v1.ChatMessage\x12\x18\n\x0btemperature\x18\x03 \x01(\x02H\x00\x88\x01\x01\x12\x12\n\x05top_p\x18\x04 \x01(\x02H\x01\x88\x01\x01\x12\x0e\n\x01n\x18\x05 \x01(\x05H\x02\x88\x01\x01\x12\x17\n\nmax_tokens\x18\x06 \x01(\x05H\x03\x88\x01\x01\x12\x0c\n\x04stop\x18\x07 \x03(\t\x12\x13\n\x06stream\x18\x08 \x01(\x08H\x04\x88\x01\x01\x12\x1d\n\x10presence_penalty\x18\n \x01(\x02H\x05\x88\x01\x01\x12\x1e\n\x11\x66requency_penalty\x18\x0b \x01(\x02H\x06\x88\x01\x01\x12H\n\nlogit_bias\x18\x0c \x03(\x0b\x32\x34.vllm.openai.v1.ChatCompletionRequest.LogitBiasEntry\x12\x11\n\x04user\x18\x0f \x01(\tH\x07\x88\x01\x01\x12\x14\n\x07\x62\x65st_of\x18\x14 \x01(\x05H\x08\x88\x01\x01\x12\x1c\n\x0fuse_beam_search\x18\x15 \x01(\x08H\t\x88\x01\x01\x12\x12\n\x05top_k\x18\x16 \x01(\x05H\n\x88\x01\x01\x12\x12\n\x05min_p\x18\x17 \x01(\x02H\x0b\x88\x01\x01\x12\x1f\n\x12repetition_penalty\x18\x18 \x01(\x02H\x0c\x88\x01\x01\x12\x1b\n\x0elength_penalty\x18\x19 \x01(\x02H\r\x88\x01\x01\x12\x11\n\x04\x65\x63ho\x18\x1a \x01(\x08H\x0e\x88\x01\x01\x12\x11\n\x04seed\x18\x1b \x01(\x05H\x0f\x88\x01\x01\x12\x15\n\x08logprobs\x18\x1c \x01(\x08H\x10\x88\x01\x01\x12\x19\n\x0ctop_logprobs\x18\x1d \x01(\x05H\x11\x88\x01\x01\x12\x17\n\nrequest_id\x18\x32 \x01(\tH\x12\x88\x01\x01\x12\x15\n\x08priority\x18\x33 \x01(\x05H\x13\x88\x01\x01\x1a\x30\n\x0eLogitBiasEntry\x12\x0b\n\x03key\x18\x01 \x01(\x05\x12\r\n\x05value\x18\x02 \x01(\x02:\x02\x38\x01\x42\x0e\n\x0c_temperatureB\x08\n\x06_top_pB\x04\n\x02_nB\r\n\x0b_max_tokensB\t\n\x07_streamB\x13\n\x11_presence_penaltyB\x14\n\x12_frequency_penaltyB\x07\n\x05_userB\n\n\x08_best_ofB\x12\n\x10_use_beam_searchB\x08\n\x06_top_kB\x08\n\x06_min_pB\x15\n\x13_repetition_penaltyB\x11\n\x0f_length_penaltyB\x07\n\x05_echoB\x07\n\x05_seedB\x0b\n\t_logprobsB\x0f\n\r_top_logprobsB\r\n\x0b_request_idB\x0b\n\t_priority"\xa2\x01\n\x0b\x43hatMessage\x12\x0c\n\x04role\x18\x01 \x01(\t\x12\x0f\n\x07\x63ontent\x18\x02 \x01(\t\x12\x11\n\x04name\x18\x03 \x01(\tH\x00\x88\x01\x01\x12,\n\ntool_calls\x18\n \x03(\x0b\x32\x18.vllm.openai.v1.ToolCall\x12\x19\n\x0ctool_call_id\x18\x0b \x01(\tH\x01\x88\x01\x01\x42\x07\n\x05_nameB\x0f\n\r_tool_call_id"T\n\x08ToolCall\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0c\n\x04type\x18\x02 \x01(\t\x12.\n\x08\x66unction\x18\x03 \x01(\x0b\x32\x1c.vllm.openai.v1.FunctionCall"/\n\x0c\x46unctionCall\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x11\n\targuments\x18\x02 \x01(\t"\x8b\x02\n\x16\x43hatCompletionResponse\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0e\n\x06object\x18\x02 \x01(\t\x12\x0f\n\x07\x63reated\x18\x03 \x01(\x03\x12\r\n\x05model\x18\x04 \x01(\t\x12+\n\x07\x63hoices\x18\x05 \x03(\x0b\x32\x1a.vllm.openai.v1.ChatChoice\x12$\n\x05usage\x18\x06 \x01(\x0b\x32\x15.vllm.openai.v1.Usage\x12\x1f\n\x12system_fingerprint\x18\x07 \x01(\tH\x00\x88\x01\x01\x12\x19\n\x0cservice_tier\x18\x08 \x01(\tH\x01\x88\x01\x01\x42\x15\n\x13_system_fingerprintB\x0f\n\r_service_tier"\xdc\x01\n\nChatChoice\x12\r\n\x05index\x18\x01 \x01(\x05\x12,\n\x07message\x18\x02 \x01(\x0b\x32\x1b.vllm.openai.v1.ChatMessage\x12\x33\n\x08logprobs\x18\x03 \x01(\x0b\x32\x1c.vllm.openai.v1.ChatLogprobsH\x00\x88\x01\x01\x12\x15\n\rfinish_reason\x18\x04 \x01(\t\x12 \n\x13stop_sequence_index\x18\x05 \x01(\x05H\x01\x88\x01\x01\x42\x0b\n\t_logprobsB\x16\n\x14_stop_sequence_index"<\n\x0c\x43hatLogprobs\x12,\n\x07\x63ontent\x18\x01 \x03(\x0b\x32\x1b.vllm.openai.v1.ChatLogprob"t\n\x0b\x43hatLogprob\x12\r\n\x05token\x18\x01 \x01(\t\x12\x0f\n\x07logprob\x18\x02 \x01(\x01\x12\x13\n\x0btoken_bytes\x18\x03 \x03(\x05\x12\x30\n\x0ctop_logprobs\x18\x04 \x03(\x0b\x32\x1a.vllm.openai.v1.TopLogprob"A\n\nTopLogprob\x12\r\n\x05token\x18\x01 \x01(\t\x12\x0f\n\x07logprob\x18\x02 \x01(\x01\x12\x13\n\x0btoken_bytes\x18\x03 \x03(\x05"\xb8\x01\n\x13\x43hatCompletionChunk\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0e\n\x06object\x18\x02 \x01(\t\x12\x0f\n\x07\x63reated\x18\x03 \x01(\x03\x12\r\n\x05model\x18\x04 \x01(\t\x12\x30\n\x07\x63hoices\x18\x05 \x03(\x0b\x32\x1f.vllm.openai.v1.ChatChunkChoice\x12)\n\x05usage\x18\x06 \x01(\x0b\x32\x15.vllm.openai.v1.UsageH\x00\x88\x01\x01\x42\x08\n\x06_usage"\xba\x01\n\x0f\x43hatChunkChoice\x12\r\n\x05index\x18\x01 \x01(\x05\x12(\n\x05\x64\x65lta\x18\x02 \x01(\x0b\x32\x19.vllm.openai.v1.ChatDelta\x12\x33\n\x08logprobs\x18\x03 \x01(\x0b\x32\x1c.vllm.openai.v1.ChatLogprobsH\x00\x88\x01\x01\x12\x1a\n\rfinish_reason\x18\x04 \x01(\tH\x01\x88\x01\x01\x42\x0b\n\t_logprobsB\x10\n\x0e_finish_reason"\xb2\x01\n\tChatDelta\x12\x11\n\x04role\x18\x01 \x01(\tH\x00\x88\x01\x01\x12\x14\n\x07\x63ontent\x18\x02 \x01(\tH\x01\x88\x01\x01\x12\x31\n\ntool_calls\x18\x03 \x03(\x0b\x32\x1d.vllm.openai.v1.ToolCallDelta\x12\x1e\n\x11reasoning_content\x18\x04 \x01(\tH\x02\x88\x01\x01\x42\x07\n\x05_roleB\n\n\x08_contentB\x14\n\x12_reasoning_content"\x96\x01\n\rToolCallDelta\x12\x0f\n\x02id\x18\x01 \x01(\tH\x00\x88\x01\x01\x12\x11\n\x04type\x18\x02 \x01(\tH\x01\x88\x01\x01\x12\x33\n\x08\x66unction\x18\x03 \x01(\x0b\x32!.vllm.openai.v1.FunctionCallDelta\x12\x12\n\x05index\x18\x04 \x01(\x05H\x02\x88\x01\x01\x42\x05\n\x03_idB\x07\n\x05_typeB\x08\n\x06_index"U\n\x11\x46unctionCallDelta\x12\x11\n\x04name\x18\x01 \x01(\tH\x00\x88\x01\x01\x12\x16\n\targuments\x18\x02 \x01(\tH\x01\x88\x01\x01\x42\x07\n\x05_nameB\x0c\n\n_arguments"\x90\x07\n\x11\x43ompletionRequest\x12\r\n\x05model\x18\x01 \x01(\t\x12\x10\n\x06prompt\x18\x02 \x01(\tH\x00\x12-\n\x07prompts\x18\x03 \x01(\x0b\x32\x1a.vllm.openai.v1.PromptListH\x00\x12\x18\n\x0btemperature\x18\n \x01(\x02H\x01\x88\x01\x01\x12\x12\n\x05top_p\x18\x0b \x01(\x02H\x02\x88\x01\x01\x12\x0e\n\x01n\x18\x0c \x01(\x05H\x03\x88\x01\x01\x12\x17\n\nmax_tokens\x18\r \x01(\x05H\x04\x88\x01\x01\x12\x0c\n\x04stop\x18\x0e \x03(\t\x12\x13\n\x06stream\x18\x0f \x01(\x08H\x05\x88\x01\x01\x12\x13\n\x06suffix\x18\x14 \x01(\tH\x06\x88\x01\x01\x12\x1d\n\x10presence_penalty\x18\x15 \x01(\x02H\x07\x88\x01\x01\x12\x1e\n\x11\x66requency_penalty\x18\x16 \x01(\x02H\x08\x88\x01\x01\x12\x14\n\x07\x62\x65st_of\x18\x17 \x01(\x05H\t\x88\x01\x01\x12\x44\n\nlogit_bias\x18\x18 \x03(\x0b\x32\x30.vllm.openai.v1.CompletionRequest.LogitBiasEntry\x12\x11\n\x04user\x18\x19 \x01(\tH\n\x88\x01\x01\x12\x11\n\x04\x65\x63ho\x18\x1a \x01(\x08H\x0b\x88\x01\x01\x12\x15\n\x08logprobs\x18\x1b \x01(\x08H\x0c\x88\x01\x01\x12\x19\n\x0ctop_logprobs\x18\x1c \x01(\x05H\r\x88\x01\x01\x12\x12\n\x05top_k\x18( \x01(\x05H\x0e\x88\x01\x01\x12\x1f\n\x12repetition_penalty\x18) \x01(\x02H\x0f\x88\x01\x01\x12\x11\n\x04seed\x18* \x01(\x05H\x10\x88\x01\x01\x12\x17\n\nrequest_id\x18\x32 \x01(\tH\x11\x88\x01\x01\x12\x15\n\x08priority\x18\x33 \x01(\x05H\x12\x88\x01\x01\x1a\x30\n\x0eLogitBiasEntry\x12\x0b\n\x03key\x18\x01 \x01(\x05\x12\r\n\x05value\x18\x02 \x01(\x02:\x02\x38\x01\x42\r\n\x0bprompt_typeB\x0e\n\x0c_temperatureB\x08\n\x06_top_pB\x04\n\x02_nB\r\n\x0b_max_tokensB\t\n\x07_streamB\t\n\x07_suffixB\x13\n\x11_presence_penaltyB\x14\n\x12_frequency_penaltyB\n\n\x08_best_ofB\x07\n\x05_userB\x07\n\x05_echoB\x0b\n\t_logprobsB\x0f\n\r_top_logprobsB\x08\n\x06_top_kB\x15\n\x13_repetition_penaltyB\x07\n\x05_seedB\r\n\x0b_request_idB\x0b\n\t_priority"\x1c\n\nPromptList\x12\x0e\n\x06values\x18\x01 \x03(\t"\xe1\x01\n\x12\x43ompletionResponse\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0e\n\x06object\x18\x02 \x01(\t\x12\x0f\n\x07\x63reated\x18\x03 \x01(\x03\x12\r\n\x05model\x18\x04 \x01(\t\x12\x31\n\x07\x63hoices\x18\x05 \x03(\x0b\x32 .vllm.openai.v1.CompletionChoice\x12$\n\x05usage\x18\x06 \x01(\x0b\x32\x15.vllm.openai.v1.Usage\x12\x1f\n\x12system_fingerprint\x18\x07 \x01(\tH\x00\x88\x01\x01\x42\x15\n\x13_system_fingerprint"\xe5\x01\n\x10\x43ompletionChoice\x12\x0c\n\x04text\x18\x01 \x01(\t\x12\r\n\x05index\x18\x02 \x01(\x05\x12\x39\n\x08logprobs\x18\x03 \x01(\x0b\x32".vllm.openai.v1.CompletionLogprobsH\x00\x88\x01\x01\x12\x15\n\rfinish_reason\x18\x04 \x01(\t\x12\x18\n\x0bstop_reason\x18\x05 \x01(\tH\x01\x88\x01\x01\x12\x11\n\ttoken_ids\x18\x06 \x03(\x05\x12\x18\n\x10prompt_token_ids\x18\x07 \x03(\x05\x42\x0b\n\t_logprobsB\x0e\n\x0c_stop_reason"\x84\x01\n\x12\x43ompletionLogprobs\x12\x13\n\x0btext_offset\x18\x01 \x03(\x05\x12\x16\n\x0etoken_logprobs\x18\x02 \x03(\x01\x12\x0e\n\x06tokens\x18\x03 \x03(\t\x12\x31\n\x0ctop_logprobs\x18\x04 \x03(\x0b\x32\x1b.vllm.openai.v1.TopLogprobs"\x85\x01\n\x0bTopLogprobs\x12\x42\n\x0ctop_logprobs\x18\x01 \x03(\x0b\x32,.vllm.openai.v1.TopLogprobs.TopLogprobsEntry\x1a\x32\n\x10TopLogprobsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x01:\x02\x38\x01"\xba\x01\n\x0f\x43ompletionChunk\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0e\n\x06object\x18\x02 \x01(\t\x12\x0f\n\x07\x63reated\x18\x03 \x01(\x03\x12\r\n\x05model\x18\x04 \x01(\t\x12\x36\n\x07\x63hoices\x18\x05 \x03(\x0b\x32%.vllm.openai.v1.CompletionChunkChoice\x12)\n\x05usage\x18\x06 \x01(\x0b\x32\x15.vllm.openai.v1.UsageH\x00\x88\x01\x01\x42\x08\n\x06_usage"\x81\x02\n\x15\x43ompletionChunkChoice\x12\r\n\x05index\x18\x01 \x01(\x05\x12\x0c\n\x04text\x18\x02 \x01(\t\x12\x39\n\x08logprobs\x18\x03 \x01(\x0b\x32".vllm.openai.v1.CompletionLogprobsH\x00\x88\x01\x01\x12\x1a\n\rfinish_reason\x18\x04 \x01(\tH\x01\x88\x01\x01\x12\x18\n\x0bstop_reason\x18\x05 \x01(\tH\x02\x88\x01\x01\x12\x11\n\ttoken_ids\x18\x06 \x03(\x05\x12\x18\n\x10prompt_token_ids\x18\x07 \x03(\x05\x42\x0b\n\t_logprobsB\x10\n\x0e_finish_reasonB\x0e\n\x0c_stop_reason"\xb2\x01\n\x05Usage\x12\x15\n\rprompt_tokens\x18\x01 \x01(\x05\x12\x19\n\x11\x63ompletion_tokens\x18\x02 \x01(\x05\x12\x14\n\x0ctotal_tokens\x18\x03 \x01(\x05\x12G\n\x15prompt_tokens_details\x18\x04 \x01(\x0b\x32#.vllm.openai.v1.PromptTokensDetailsH\x00\x88\x01\x01\x42\x18\n\x16_prompt_tokens_details"C\n\x13PromptTokensDetails\x12\x1a\n\rcached_tokens\x18\x01 \x01(\x05H\x00\x88\x01\x01\x42\x10\n\x0e_cached_tokens2\xcb\x06\n\x0bVLLMService\x12X\n\nServerLive\x12!.vllm.openai.v1.ServerLiveRequest\x1a".vllm.openai.v1.ServerLiveResponse"\x03\x90\x02\x01\x12[\n\x0bServerReady\x12".vllm.openai.v1.ServerReadyRequest\x1a#.vllm.openai.v1.ServerReadyResponse"\x03\x90\x02\x01\x12X\n\nModelReady\x12!.vllm.openai.v1.ModelReadyRequest\x1a".vllm.openai.v1.ModelReadyResponse"\x03\x90\x02\x01\x12X\n\nListModels\x12!.vllm.openai.v1.ListModelsRequest\x1a".vllm.openai.v1.ListModelsResponse"\x03\x90\x02\x01\x12S\n\x0cGetModelInfo\x12#.vllm.openai.v1.GetModelInfoRequest\x1a\x19.vllm.openai.v1.ModelInfo"\x03\x90\x02\x01\x12\x61\n\x0e\x43hatCompletion\x12%.vllm.openai.v1.ChatCompletionRequest\x1a&.vllm.openai.v1.ChatCompletionResponse"\x00\x12\x66\n\x14\x43hatCompletionStream\x12%.vllm.openai.v1.ChatCompletionRequest\x1a#.vllm.openai.v1.ChatCompletionChunk"\x00\x30\x01\x12U\n\nCompletion\x12!.vllm.openai.v1.CompletionRequest\x1a".vllm.openai.v1.CompletionResponse"\x00\x12Z\n\x10\x43ompletionStream\x12!.vllm.openai.v1.CompletionRequest\x1a\x1f.vllm.openai.v1.CompletionChunk"\x00\x30\x01\x42W\n\x16\x61i.vllm.grpc.openai.v1P\x01Z;github.com/vllm-project/vllm-grpc/gen/go/openai/v1;openaiv1b\x06proto3'
+)
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
-_builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'openai_pb2', _globals)
+_builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, "openai_pb2", _globals)
 if not _descriptor._USE_C_DESCRIPTORS:
-  _globals['DESCRIPTOR']._loaded_options = None
-  _globals['DESCRIPTOR']._serialized_options = b'\n\026ai.vllm.grpc.openai.v1P\001Z;github.com/vllm-project/vllm-grpc/gen/go/openai/v1;openaiv1'
-  _globals['_CHATCOMPLETIONREQUEST_LOGITBIASENTRY']._loaded_options = None
-  _globals['_CHATCOMPLETIONREQUEST_LOGITBIASENTRY']._serialized_options = b'8\001'
-  _globals['_COMPLETIONREQUEST_LOGITBIASENTRY']._loaded_options = None
-  _globals['_COMPLETIONREQUEST_LOGITBIASENTRY']._serialized_options = b'8\001'
-  _globals['_TOPLOGPROBS_TOPLOGPROBSENTRY']._loaded_options = None
-  _globals['_TOPLOGPROBS_TOPLOGPROBSENTRY']._serialized_options = b'8\001'
-  _globals['_VLLMSERVICE'].methods_by_name['ServerLive']._loaded_options = None
-  _globals['_VLLMSERVICE'].methods_by_name['ServerLive']._serialized_options = b'\220\002\001'
-  _globals['_VLLMSERVICE'].methods_by_name['ServerReady']._loaded_options = None
-  _globals['_VLLMSERVICE'].methods_by_name['ServerReady']._serialized_options = b'\220\002\001'
-  _globals['_VLLMSERVICE'].methods_by_name['ModelReady']._loaded_options = None
-  _globals['_VLLMSERVICE'].methods_by_name['ModelReady']._serialized_options = b'\220\002\001'
-  _globals['_VLLMSERVICE'].methods_by_name['ListModels']._loaded_options = None
-  _globals['_VLLMSERVICE'].methods_by_name['ListModels']._serialized_options = b'\220\002\001'
-  _globals['_VLLMSERVICE'].methods_by_name['GetModelInfo']._loaded_options = None
-  _globals['_VLLMSERVICE'].methods_by_name['GetModelInfo']._serialized_options = b'\220\002\001'
-  _globals['_SERVERLIVEREQUEST']._serialized_start=32
-  _globals['_SERVERLIVEREQUEST']._serialized_end=51
-  _globals['_SERVERLIVERESPONSE']._serialized_start=53
-  _globals['_SERVERLIVERESPONSE']._serialized_end=87
-  _globals['_SERVERREADYREQUEST']._serialized_start=89
-  _globals['_SERVERREADYREQUEST']._serialized_end=109
-  _globals['_SERVERREADYRESPONSE']._serialized_start=111
-  _globals['_SERVERREADYRESPONSE']._serialized_end=147
-  _globals['_MODELREADYREQUEST']._serialized_start=149
-  _globals['_MODELREADYREQUEST']._serialized_end=182
-  _globals['_MODELREADYRESPONSE']._serialized_start=184
-  _globals['_MODELREADYRESPONSE']._serialized_end=233
-  _globals['_LISTMODELSREQUEST']._serialized_start=235
-  _globals['_LISTMODELSREQUEST']._serialized_end=254
-  _globals['_LISTMODELSRESPONSE']._serialized_start=256
-  _globals['_LISTMODELSRESPONSE']._serialized_end=333
-  _globals['_GETMODELINFOREQUEST']._serialized_start=335
-  _globals['_GETMODELINFOREQUEST']._serialized_end=368
-  _globals['_MODELINFO']._serialized_start=370
-  _globals['_MODELINFO']._serialized_end=482
-  _globals['_CHATCOMPLETIONREQUEST']._serialized_start=485
-  _globals['_CHATCOMPLETIONREQUEST']._serialized_end=1468
-  _globals['_CHATCOMPLETIONREQUEST_LOGITBIASENTRY']._serialized_start=1140
-  _globals['_CHATCOMPLETIONREQUEST_LOGITBIASENTRY']._serialized_end=1188
-  _globals['_CHATMESSAGE']._serialized_start=1471
-  _globals['_CHATMESSAGE']._serialized_end=1633
-  _globals['_TOOLCALL']._serialized_start=1635
-  _globals['_TOOLCALL']._serialized_end=1719
-  _globals['_FUNCTIONCALL']._serialized_start=1721
-  _globals['_FUNCTIONCALL']._serialized_end=1768
-  _globals['_CHATCOMPLETIONRESPONSE']._serialized_start=1771
-  _globals['_CHATCOMPLETIONRESPONSE']._serialized_end=2038
-  _globals['_CHATCHOICE']._serialized_start=2041
-  _globals['_CHATCHOICE']._serialized_end=2261
-  _globals['_CHATLOGPROBS']._serialized_start=2263
-  _globals['_CHATLOGPROBS']._serialized_end=2323
-  _globals['_CHATLOGPROB']._serialized_start=2325
-  _globals['_CHATLOGPROB']._serialized_end=2441
-  _globals['_TOPLOGPROB']._serialized_start=2443
-  _globals['_TOPLOGPROB']._serialized_end=2508
-  _globals['_CHATCOMPLETIONCHUNK']._serialized_start=2511
-  _globals['_CHATCOMPLETIONCHUNK']._serialized_end=2695
-  _globals['_CHATCHUNKCHOICE']._serialized_start=2698
-  _globals['_CHATCHUNKCHOICE']._serialized_end=2884
-  _globals['_CHATDELTA']._serialized_start=2887
-  _globals['_CHATDELTA']._serialized_end=3065
-  _globals['_TOOLCALLDELTA']._serialized_start=3068
-  _globals['_TOOLCALLDELTA']._serialized_end=3218
-  _globals['_FUNCTIONCALLDELTA']._serialized_start=3220
-  _globals['_FUNCTIONCALLDELTA']._serialized_end=3305
-  _globals['_COMPLETIONREQUEST']._serialized_start=3308
-  _globals['_COMPLETIONREQUEST']._serialized_end=4220
-  _globals['_COMPLETIONREQUEST_LOGITBIASENTRY']._serialized_start=1140
-  _globals['_COMPLETIONREQUEST_LOGITBIASENTRY']._serialized_end=1188
-  _globals['_PROMPTLIST']._serialized_start=4222
-  _globals['_PROMPTLIST']._serialized_end=4250
-  _globals['_COMPLETIONRESPONSE']._serialized_start=4253
-  _globals['_COMPLETIONRESPONSE']._serialized_end=4478
-  _globals['_COMPLETIONCHOICE']._serialized_start=4481
-  _globals['_COMPLETIONCHOICE']._serialized_end=4710
-  _globals['_COMPLETIONLOGPROBS']._serialized_start=4713
-  _globals['_COMPLETIONLOGPROBS']._serialized_end=4845
-  _globals['_TOPLOGPROBS']._serialized_start=4848
-  _globals['_TOPLOGPROBS']._serialized_end=4981
-  _globals['_TOPLOGPROBS_TOPLOGPROBSENTRY']._serialized_start=4931
-  _globals['_TOPLOGPROBS_TOPLOGPROBSENTRY']._serialized_end=4981
-  _globals['_COMPLETIONCHUNK']._serialized_start=4984
-  _globals['_COMPLETIONCHUNK']._serialized_end=5170
-  _globals['_COMPLETIONCHUNKCHOICE']._serialized_start=5173
-  _globals['_COMPLETIONCHUNKCHOICE']._serialized_end=5430
-  _globals['_USAGE']._serialized_start=5433
-  _globals['_USAGE']._serialized_end=5611
-  _globals['_PROMPTTOKENSDETAILS']._serialized_start=5613
-  _globals['_PROMPTTOKENSDETAILS']._serialized_end=5680
-  _globals['_VLLMSERVICE']._serialized_start=5683
-  _globals['_VLLMSERVICE']._serialized_end=6526
+    _globals["DESCRIPTOR"]._loaded_options = None
+    _globals[
+        "DESCRIPTOR"
+    ]._serialized_options = b"\n\026ai.vllm.grpc.openai.v1P\001Z;github.com/vllm-project/vllm-grpc/gen/go/openai/v1;openaiv1"
+    _globals["_CHATCOMPLETIONREQUEST_LOGITBIASENTRY"]._loaded_options = None
+    _globals["_CHATCOMPLETIONREQUEST_LOGITBIASENTRY"]._serialized_options = b"8\001"
+    _globals["_COMPLETIONREQUEST_LOGITBIASENTRY"]._loaded_options = None
+    _globals["_COMPLETIONREQUEST_LOGITBIASENTRY"]._serialized_options = b"8\001"
+    _globals["_TOPLOGPROBS_TOPLOGPROBSENTRY"]._loaded_options = None
+    _globals["_TOPLOGPROBS_TOPLOGPROBSENTRY"]._serialized_options = b"8\001"
+    _globals["_VLLMSERVICE"].methods_by_name["ServerLive"]._loaded_options = None
+    _globals["_VLLMSERVICE"].methods_by_name[
+        "ServerLive"
+    ]._serialized_options = b"\220\002\001"
+    _globals["_VLLMSERVICE"].methods_by_name["ServerReady"]._loaded_options = None
+    _globals["_VLLMSERVICE"].methods_by_name[
+        "ServerReady"
+    ]._serialized_options = b"\220\002\001"
+    _globals["_VLLMSERVICE"].methods_by_name["ModelReady"]._loaded_options = None
+    _globals["_VLLMSERVICE"].methods_by_name[
+        "ModelReady"
+    ]._serialized_options = b"\220\002\001"
+    _globals["_VLLMSERVICE"].methods_by_name["ListModels"]._loaded_options = None
+    _globals["_VLLMSERVICE"].methods_by_name[
+        "ListModels"
+    ]._serialized_options = b"\220\002\001"
+    _globals["_VLLMSERVICE"].methods_by_name["GetModelInfo"]._loaded_options = None
+    _globals["_VLLMSERVICE"].methods_by_name[
+        "GetModelInfo"
+    ]._serialized_options = b"\220\002\001"
+    _globals["_SERVERLIVEREQUEST"]._serialized_start = 32
+    _globals["_SERVERLIVEREQUEST"]._serialized_end = 51
+    _globals["_SERVERLIVERESPONSE"]._serialized_start = 53
+    _globals["_SERVERLIVERESPONSE"]._serialized_end = 87
+    _globals["_SERVERREADYREQUEST"]._serialized_start = 89
+    _globals["_SERVERREADYREQUEST"]._serialized_end = 109
+    _globals["_SERVERREADYRESPONSE"]._serialized_start = 111
+    _globals["_SERVERREADYRESPONSE"]._serialized_end = 147
+    _globals["_MODELREADYREQUEST"]._serialized_start = 149
+    _globals["_MODELREADYREQUEST"]._serialized_end = 182
+    _globals["_MODELREADYRESPONSE"]._serialized_start = 184
+    _globals["_MODELREADYRESPONSE"]._serialized_end = 233
+    _globals["_LISTMODELSREQUEST"]._serialized_start = 235
+    _globals["_LISTMODELSREQUEST"]._serialized_end = 254
+    _globals["_LISTMODELSRESPONSE"]._serialized_start = 256
+    _globals["_LISTMODELSRESPONSE"]._serialized_end = 333
+    _globals["_GETMODELINFOREQUEST"]._serialized_start = 335
+    _globals["_GETMODELINFOREQUEST"]._serialized_end = 368
+    _globals["_MODELINFO"]._serialized_start = 370
+    _globals["_MODELINFO"]._serialized_end = 482
+    _globals["_CHATCOMPLETIONREQUEST"]._serialized_start = 485
+    _globals["_CHATCOMPLETIONREQUEST"]._serialized_end = 1468
+    _globals["_CHATCOMPLETIONREQUEST_LOGITBIASENTRY"]._serialized_start = 1140
+    _globals["_CHATCOMPLETIONREQUEST_LOGITBIASENTRY"]._serialized_end = 1188
+    _globals["_CHATMESSAGE"]._serialized_start = 1471
+    _globals["_CHATMESSAGE"]._serialized_end = 1633
+    _globals["_TOOLCALL"]._serialized_start = 1635
+    _globals["_TOOLCALL"]._serialized_end = 1719
+    _globals["_FUNCTIONCALL"]._serialized_start = 1721
+    _globals["_FUNCTIONCALL"]._serialized_end = 1768
+    _globals["_CHATCOMPLETIONRESPONSE"]._serialized_start = 1771
+    _globals["_CHATCOMPLETIONRESPONSE"]._serialized_end = 2038
+    _globals["_CHATCHOICE"]._serialized_start = 2041
+    _globals["_CHATCHOICE"]._serialized_end = 2261
+    _globals["_CHATLOGPROBS"]._serialized_start = 2263
+    _globals["_CHATLOGPROBS"]._serialized_end = 2323
+    _globals["_CHATLOGPROB"]._serialized_start = 2325
+    _globals["_CHATLOGPROB"]._serialized_end = 2441
+    _globals["_TOPLOGPROB"]._serialized_start = 2443
+    _globals["_TOPLOGPROB"]._serialized_end = 2508
+    _globals["_CHATCOMPLETIONCHUNK"]._serialized_start = 2511
+    _globals["_CHATCOMPLETIONCHUNK"]._serialized_end = 2695
+    _globals["_CHATCHUNKCHOICE"]._serialized_start = 2698
+    _globals["_CHATCHUNKCHOICE"]._serialized_end = 2884
+    _globals["_CHATDELTA"]._serialized_start = 2887
+    _globals["_CHATDELTA"]._serialized_end = 3065
+    _globals["_TOOLCALLDELTA"]._serialized_start = 3068
+    _globals["_TOOLCALLDELTA"]._serialized_end = 3218
+    _globals["_FUNCTIONCALLDELTA"]._serialized_start = 3220
+    _globals["_FUNCTIONCALLDELTA"]._serialized_end = 3305
+    _globals["_COMPLETIONREQUEST"]._serialized_start = 3308
+    _globals["_COMPLETIONREQUEST"]._serialized_end = 4220
+    _globals["_COMPLETIONREQUEST_LOGITBIASENTRY"]._serialized_start = 1140
+    _globals["_COMPLETIONREQUEST_LOGITBIASENTRY"]._serialized_end = 1188
+    _globals["_PROMPTLIST"]._serialized_start = 4222
+    _globals["_PROMPTLIST"]._serialized_end = 4250
+    _globals["_COMPLETIONRESPONSE"]._serialized_start = 4253
+    _globals["_COMPLETIONRESPONSE"]._serialized_end = 4478
+    _globals["_COMPLETIONCHOICE"]._serialized_start = 4481
+    _globals["_COMPLETIONCHOICE"]._serialized_end = 4710
+    _globals["_COMPLETIONLOGPROBS"]._serialized_start = 4713
+    _globals["_COMPLETIONLOGPROBS"]._serialized_end = 4845
+    _globals["_TOPLOGPROBS"]._serialized_start = 4848
+    _globals["_TOPLOGPROBS"]._serialized_end = 4981
+    _globals["_TOPLOGPROBS_TOPLOGPROBSENTRY"]._serialized_start = 4931
+    _globals["_TOPLOGPROBS_TOPLOGPROBSENTRY"]._serialized_end = 4981
+    _globals["_COMPLETIONCHUNK"]._serialized_start = 4984
+    _globals["_COMPLETIONCHUNK"]._serialized_end = 5170
+    _globals["_COMPLETIONCHUNKCHOICE"]._serialized_start = 5173
+    _globals["_COMPLETIONCHUNKCHOICE"]._serialized_end = 5430
+    _globals["_USAGE"]._serialized_start = 5433
+    _globals["_USAGE"]._serialized_end = 5611
+    _globals["_PROMPTTOKENSDETAILS"]._serialized_start = 5613
+    _globals["_PROMPTTOKENSDETAILS"]._serialized_end = 5680
+    _globals["_VLLMSERVICE"]._serialized_start = 5683
+    _globals["_VLLMSERVICE"]._serialized_end = 6526
 # @@protoc_insertion_point(module_scope)

@@ -29,7 +29,9 @@ async def grpc_stub() -> openai_pb2_grpc.VLLMServiceStub:
 
 
 @pytest.mark.asyncio
-async def test_grpc_completion_roundtrip(grpc_stub: openai_pb2_grpc.VLLMServiceStub) -> None:
+async def test_grpc_completion_roundtrip(
+    grpc_stub: openai_pb2_grpc.VLLMServiceStub,
+) -> None:
     response = await grpc_stub.Completion(
         openai_pb2.CompletionRequest(
             model=settings.default_model_name,
@@ -62,4 +64,3 @@ async def test_grpc_chat_stream(grpc_stub: openai_pb2_grpc.VLLMServiceStub) -> N
         if len(chunks) > 10:
             break
     assert chunks, "stream yielded no chunks"
-

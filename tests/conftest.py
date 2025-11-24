@@ -12,4 +12,3 @@ from src.main import app
 @pytest.fixture(scope="module")
 def client() -> TestClient:
     return TestClient(app)
-

@@ -48,12 +48,15 @@ class ServerSettings:
     log_level: str = os.getenv("DUMMY_VLLM_LOG_LEVEL", "info")
     ttft_delay_seconds: float = _float_from_env("DUMMY_VLLM_TTFT_DELAY", 0.0)
     token_delay_seconds: float = _float_from_env("DUMMY_VLLM_TOKEN_DELAY", 0.0)
-    token_delay_jitter_seconds: float = _float_from_env("DUMMY_VLLM_TOKEN_DELAY_JITTER", 0.0)
-    default_model_name: str = os.getenv("DUMMY_VLLM_MODEL", "Qwen/Qwen2.5-VL-7B-Instruct")
+    token_delay_jitter_seconds: float = _float_from_env(
+        "DUMMY_VLLM_TOKEN_DELAY_JITTER", 0.0
+    )
+    default_model_name: str = os.getenv(
+        "DUMMY_VLLM_MODEL", "Qwen/Qwen2.5-VL-7B-Instruct"
+    )
     grpc_host: str = os.getenv("DUMMY_VLLM_GRPC_HOST", _DEFAULT_HOST)
     grpc_port: int = _int_from_env("DUMMY_VLLM_GRPC_PORT", 9000)
     enable_grpc: bool = _bool_from_env("DUMMY_VLLM_ENABLE_GRPC", True)
 
 
 settings = ServerSettings()
-

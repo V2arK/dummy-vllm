@@ -19,5 +19,7 @@ shell:
     docker run --rm -it {{DOCKER_IMAGE}} /bin/bash
 
 clean:
-    docker rm {{DOCKER_IMAGE}} --force || true; docker rmi {{DOCKER_IMAGE}} || true
+    docker stop $(docker ps -a --filter ancestor={{DOCKER_IMAGE}} -q) || true
+    docker rm $(docker ps -a --filter ancestor={{DOCKER_IMAGE}} -q) || true
+    docker rmi {{DOCKER_IMAGE}} || true
 

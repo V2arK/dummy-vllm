@@ -55,7 +55,9 @@ async def run_chat_stream(stub: openai_pb2_grpc.VLLMServiceStub) -> None:
             openai_pb2.ChatCompletionRequest(
                 model="Qwen/Qwen2.5-VL-7B-Instruct",
                 messages=[
-                    openai_pb2.ChatMessage(role="user", content="Give me a short motivational quote"),
+                    openai_pb2.ChatMessage(
+                        role="user", content="Give me a short motivational quote"
+                    ),
                 ],
                 max_tokens=6,
             ),
@@ -79,4 +81,3 @@ async def main() -> None:
 
 if __name__ == "__main__":
     asyncio.run(main())
-

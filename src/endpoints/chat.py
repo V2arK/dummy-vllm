@@ -37,8 +37,10 @@ async def create_chat_completion(
     choices: List[ChatCompletionChoice] = []
     total_completion_tokens = 0
     for index in range(request.n):
-        generated_text, truncated = DummyTextGenerator.generate_completion_with_metadata(
-            max_tokens=request.max_tokens
+        generated_text, truncated = (
+            DummyTextGenerator.generate_completion_with_metadata(
+                max_tokens=request.max_tokens
+            )
         )
         completion_tokens = DummyTextGenerator.estimate_token_count(generated_text)
         total_completion_tokens += completion_tokens
@@ -55,18 +57,24 @@ async def create_chat_completion(
         prompt_tokens=prompt_tokens,
         completion_tokens=total_completion_tokens,
     )
-    metrics_collector.record_request(endpoint="/v1/chat/completions", tokens_generated=total_completion_tokens)
+    metrics_collector.record_request(
+        endpoint="/v1/chat/completions", tokens_generated=total_completion_tokens
+    )
     return response
 
 
-async def _streaming_chat_completion(request: ChatCompletionRequest) -> StreamingResponse:
+async def _streaming_chat_completion(
+    request: ChatCompletionRequest,
+) -> StreamingResponse:
     completion_id = ResponseBuilder.completion_id()
 
     async def event_generator() -> AsyncGenerator[str, None]:
         total_completion_tokens = 0
         try:
             for choice_index in range(request.n):
-                tokens, truncated = DummyTextGenerator.prepare_token_stream(max_tokens=request.max_tokens)
+                tokens, truncated = DummyTextGenerator.prepare_token_stream(
+                    max_tokens=request.max_tokens
+                )
                 async for token in DummyTextGenerator.stream_from_tokens(tokens):
                     total_completion_tokens += 1
                     chunk = ResponseBuilder.chat_stream_chunk(
@@ -111,4 +119,3 @@ def _messages_to_prompt(messages: List[ChatCompletionMessage]) -> str:
     for message in messages:
         joined.append(f"{message.role}: {message.content}")
     return "\n".join(joined)
-

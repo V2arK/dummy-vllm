@@ -33,4 +33,3 @@ async def list_models() -> Dict[str, Any]:
             }
         ],
     }
-

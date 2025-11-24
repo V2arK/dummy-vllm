@@ -115,7 +115,9 @@ class DummyGrpcServicer(openai_pb2_grpc.VLLMServiceServicer):
         context: aio.ServicerContext,
     ) -> openai_pb2.ChatCompletionResponse:
         peer = context.peer()
-        logger.info(f"{peer} - gRPC ChatCompletion - model: {request.model or self._model_name}")
+        logger.info(
+            f"{peer} - gRPC ChatCompletion - model: {request.model or self._model_name}"
+        )
         del context
         chat_request = converters.chat_request_from_proto(
             request,
@@ -135,7 +137,9 @@ class DummyGrpcServicer(openai_pb2_grpc.VLLMServiceServicer):
         context: aio.ServicerContext,
     ) -> AsyncIterator[openai_pb2.ChatCompletionChunk]:
         peer = context.peer()
-        logger.info(f"{peer} - gRPC ChatCompletionStream - model: {request.model or self._model_name}")
+        logger.info(
+            f"{peer} - gRPC ChatCompletionStream - model: {request.model or self._model_name}"
+        )
         del context
         chat_request = converters.chat_request_from_proto(
             request,
@@ -163,7 +167,9 @@ class DummyGrpcServicer(openai_pb2_grpc.VLLMServiceServicer):
         context: aio.ServicerContext,
     ) -> openai_pb2.CompletionResponse:
         peer = context.peer()
-        logger.info(f"{peer} - gRPC Completion - model: {request.model or self._model_name}")
+        logger.info(
+            f"{peer} - gRPC Completion - model: {request.model or self._model_name}"
+        )
         del context
         completion_request = converters.completion_request_from_proto(
             request,
@@ -183,7 +189,9 @@ class DummyGrpcServicer(openai_pb2_grpc.VLLMServiceServicer):
         context: aio.ServicerContext,
     ) -> AsyncIterator[openai_pb2.CompletionChunk]:
         peer = context.peer()
-        logger.info(f"{peer} - gRPC CompletionStream - model: {request.model or self._model_name}")
+        logger.info(
+            f"{peer} - gRPC CompletionStream - model: {request.model or self._model_name}"
+        )
         del context
         completion_request = converters.completion_request_from_proto(
             request,
@@ -239,7 +247,9 @@ def _build_completion_response(request: CompletionRequest) -> CompletionResponse
         prompt_tokens = DummyTextGenerator.estimate_token_count(prompt_text)
         total_prompt_tokens += prompt_tokens
         for _ in range(request.n):
-            generated_text = DummyTextGenerator.generate_completion_text(max_tokens=request.max_tokens)
+            generated_text = DummyTextGenerator.generate_completion_text(
+                max_tokens=request.max_tokens
+            )
             completion_tokens = DummyTextGenerator.estimate_token_count(generated_text)
             total_completion_tokens += completion_tokens
             choices.append(
@@ -266,7 +276,9 @@ def _build_chat_response(request: ChatCompletionRequest) -> ChatCompletionRespon
     total_completion_tokens = 0
 
     for index in range(request.n):
-        content = DummyTextGenerator.generate_completion_text(max_tokens=request.max_tokens)
+        content = DummyTextGenerator.generate_completion_text(
+            max_tokens=request.max_tokens
+        )
         completion_tokens = DummyTextGenerator.estimate_token_count(content)
         total_completion_tokens += completion_tokens
         choices.append(
@@ -294,7 +306,9 @@ async def _completion_chunk_stream(
 
     for _ in prompts:
         for _ in range(request.n):
-            async for token in DummyTextGenerator.stream_tokens(max_tokens=request.max_tokens):
+            async for token in DummyTextGenerator.stream_tokens(
+                max_tokens=request.max_tokens
+            ):
                 chunk = converters.completion_chunk_from_choice(
                     completion_id=completion_id,
                     model=request.model,
@@ -313,12 +327,15 @@ async def _completion_chunk_stream(
             yield final_chunk, 0
             choice_index += 1
 
+
 async def _chat_chunk_stream(
     request: ChatCompletionRequest,
 ) -> AsyncIterator[Tuple[openai_pb2.ChatCompletionChunk, int]]:
     completion_id = ResponseBuilder.completion_id()
     for choice_index in range(request.n):
-        async for token in DummyTextGenerator.stream_tokens(max_tokens=request.max_tokens):
+        async for token in DummyTextGenerator.stream_tokens(
+            max_tokens=request.max_tokens
+        ):
             chunk = converters.chat_chunk_from_delta(
                 completion_id=completion_id,
                 model=request.model,
@@ -353,5 +370,3 @@ def _messages_to_prompt(messages: List[ChatCompletionMessage]) -> str:
     for message in messages:
         joined.append(f"{message.role}: {message.content}")
     return "\n".join(joined)
-
-
