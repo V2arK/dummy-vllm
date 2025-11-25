@@ -54,6 +54,7 @@ class ServerSettings:
     default_model_name: str = os.getenv(
         "DUMMY_VLLM_MODEL", "Qwen/Qwen2.5-VL-7B-Instruct"
     )
+    default_max_tokens: int = _int_from_env("DUMMY_VLLM_DEFAULT_MAX_TOKENS", 16)
     grpc_host: str = os.getenv("DUMMY_VLLM_GRPC_HOST", _DEFAULT_HOST)
     grpc_port: int = _int_from_env("DUMMY_VLLM_GRPC_PORT", 9000)
     enable_grpc: bool = _bool_from_env("DUMMY_VLLM_ENABLE_GRPC", True)

@@ -46,6 +46,7 @@ All knobs are available as environment variables (see `src/config.py` for defaul
 | `DUMMY_VLLM_PORT` | Listen port (default `8000`). |
 | `DUMMY_VLLM_LOG_LEVEL` | Uvicorn log level. |
 | `DUMMY_VLLM_MODEL` | Model identifier returned from `/v1/models`. |
+| `DUMMY_VLLM_DEFAULT_MAX_TOKENS` | Default maximum tokens for responses (default `16`). Set higher for longer responses (e.g., `1000`, `5000`). |
 | `DUMMY_VLLM_TTFT_DELAY` | Optional artificial delay before the first streamed token. |
 | `DUMMY_VLLM_TOKEN_DELAY` | Optional per-token delay for streaming responses. |
 | `DUMMY_VLLM_TOKEN_DELAY_JITTER` | Jitter range added to the token delay. |

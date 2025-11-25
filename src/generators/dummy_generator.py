@@ -69,7 +69,15 @@ class DummyTextGenerator:
         base_response = random.choice(cls.RESPONSE_POOL)
         tokens, join_with_space = cls._tokenize_text(base_response)
         safe_max = max(1, max_tokens)
-        truncated = len(tokens) > safe_max
+
+        # If max_tokens exceeds base response length, repeat tokens to fill
+        if len(tokens) < safe_max:
+            repetitions_needed = (safe_max // len(tokens)) + 1
+            tokens = tokens * repetitions_needed
+            truncated = True
+        else:
+            truncated = len(tokens) > safe_max
+
         return tokens[:safe_max], join_with_space, truncated
 
     @staticmethod
