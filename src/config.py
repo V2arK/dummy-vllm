@@ -58,6 +58,7 @@ class ServerSettings:
     grpc_host: str = os.getenv("DUMMY_VLLM_GRPC_HOST", _DEFAULT_HOST)
     grpc_port: int = _int_from_env("DUMMY_VLLM_GRPC_PORT", 9000)
     enable_grpc: bool = _bool_from_env("DUMMY_VLLM_ENABLE_GRPC", True)
+    grpc_stream_chunk_size: int = _int_from_env("DUMMY_VLLM_GRPC_STREAM_CHUNK_SIZE", 1)
 
 
 settings = ServerSettings()
