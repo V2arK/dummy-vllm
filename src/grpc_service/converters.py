@@ -5,19 +5,16 @@
 from __future__ import annotations
 
 import time
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, Optional
 
 # Third-party imports
-from google.protobuf.message import Message
 
 # Local/application imports
 from src.grpc_service.proto import openai_pb2
 from src.models import (
-    ChatCompletionChoice,
     ChatCompletionMessage,
     ChatCompletionRequest,
     ChatCompletionResponse,
-    CompletionChoice,
     CompletionRequest,
     CompletionResponse,
     CompletionUsage,
@@ -145,6 +142,8 @@ def completion_chunk_from_choice(
     choice_index: int,
     text: str,
     finish_reason: Optional[str],
+    prompt_tokens: Optional[int] = None,
+    completion_tokens: Optional[int] = None,
 ) -> openai_pb2.CompletionChunk:
     chunk = openai_pb2.CompletionChunk(
         id=completion_id,
@@ -157,6 +156,10 @@ def completion_chunk_from_choice(
     choice.text = text
     if finish_reason is not None:
         choice.finish_reason = finish_reason
+    if prompt_tokens is not None and completion_tokens is not None:
+        chunk.usage.prompt_tokens = prompt_tokens
+        chunk.usage.completion_tokens = completion_tokens
+        chunk.usage.total_tokens = prompt_tokens + completion_tokens
     return chunk
 
 
@@ -167,6 +170,8 @@ def chat_chunk_from_delta(
     choice_index: int,
     content: str,
     finish_reason: Optional[str],
+    prompt_tokens: Optional[int] = None,
+    completion_tokens: Optional[int] = None,
 ) -> openai_pb2.ChatCompletionChunk:
     chunk = openai_pb2.ChatCompletionChunk(
         id=completion_id,
@@ -179,6 +184,10 @@ def chat_chunk_from_delta(
     choice.delta.content = content
     if finish_reason is not None:
         choice.finish_reason = finish_reason
+    if prompt_tokens is not None and completion_tokens is not None:
+        chunk.usage.prompt_tokens = prompt_tokens
+        chunk.usage.completion_tokens = completion_tokens
+        chunk.usage.total_tokens = prompt_tokens + completion_tokens
     return chunk
 
 

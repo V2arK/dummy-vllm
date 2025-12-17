@@ -305,6 +305,12 @@ async def _completion_chunk_stream(
     choice_index = 0
     chunk_size = settings.grpc_stream_chunk_size
 
+    # Calculate prompt tokens for usage info
+    total_prompt_tokens = sum(
+        DummyTextGenerator.estimate_token_count(p) for p in prompts
+    )
+    total_completion_tokens = 0
+
     for _ in prompts:
         for _ in range(request.n):
             token_buffer: List[str] = []
@@ -321,6 +327,7 @@ async def _completion_chunk_stream(
                         text=merged_text,
                         finish_reason=None,
                     )
+                    total_completion_tokens += len(token_buffer)
                     yield chunk, len(token_buffer)
                     token_buffer = []
             # Flush remaining tokens in buffer
@@ -333,13 +340,17 @@ async def _completion_chunk_stream(
                     text=merged_text,
                     finish_reason=None,
                 )
+                total_completion_tokens += len(token_buffer)
                 yield chunk, len(token_buffer)
+            # Final chunk includes usage information
             final_chunk = converters.completion_chunk_from_choice(
                 completion_id=completion_id,
                 model=request.model,
                 choice_index=choice_index,
                 text="",
                 finish_reason="stop",
+                prompt_tokens=total_prompt_tokens,
+                completion_tokens=total_completion_tokens,
             )
             yield final_chunk, 0
             choice_index += 1
@@ -350,6 +361,12 @@ async def _chat_chunk_stream(
 ) -> AsyncIterator[Tuple[openai_pb2.ChatCompletionChunk, int]]:
     completion_id = ResponseBuilder.completion_id()
     chunk_size = settings.grpc_stream_chunk_size
+
+    # Calculate prompt tokens for usage info
+    prompt_text = _messages_to_prompt(request.messages)
+    prompt_tokens = DummyTextGenerator.estimate_token_count(prompt_text)
+    total_completion_tokens = 0
+
     for choice_index in range(request.n):
         token_buffer: List[str] = []
         async for token in DummyTextGenerator.stream_tokens(
@@ -365,6 +382,7 @@ async def _chat_chunk_stream(
                     content=merged_content,
                     finish_reason=None,
                 )
+                total_completion_tokens += len(token_buffer)
                 yield chunk, len(token_buffer)
                 token_buffer = []
         # Flush remaining tokens in buffer
@@ -377,13 +395,17 @@ async def _chat_chunk_stream(
                 content=merged_content,
                 finish_reason=None,
             )
+            total_completion_tokens += len(token_buffer)
             yield chunk, len(token_buffer)
+        # Final chunk includes usage information
         final_chunk = converters.chat_chunk_from_delta(
             completion_id=completion_id,
             model=request.model,
             choice_index=choice_index,
             content="",
             finish_reason="stop",
+            prompt_tokens=prompt_tokens,
+            completion_tokens=total_completion_tokens,
         )
         yield final_chunk, 0
 
