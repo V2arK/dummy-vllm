@@ -142,7 +142,6 @@ def completion_chunk_from_choice(
     choice_index: int,
     text: str,
     finish_reason: Optional[str],
-    prompt_tokens: Optional[int] = None,
     completion_tokens: Optional[int] = None,
 ) -> openai_pb2.CompletionChunk:
     chunk = openai_pb2.CompletionChunk(
@@ -156,10 +155,12 @@ def completion_chunk_from_choice(
     choice.text = text
     if finish_reason is not None:
         choice.finish_reason = finish_reason
-    if prompt_tokens is not None and completion_tokens is not None:
-        chunk.usage.prompt_tokens = prompt_tokens
+    if completion_tokens is not None:
+        # Only send completion_tokens, not prompt_tokens.
+        # The benchmark uses its own tokenizer for prompt_len, which is more accurate
+        # than our simple whitespace-based tokenization.
         chunk.usage.completion_tokens = completion_tokens
-        chunk.usage.total_tokens = prompt_tokens + completion_tokens
+        chunk.usage.total_tokens = completion_tokens
     return chunk
 
 
@@ -170,7 +171,6 @@ def chat_chunk_from_delta(
     choice_index: int,
     content: str,
     finish_reason: Optional[str],
-    prompt_tokens: Optional[int] = None,
     completion_tokens: Optional[int] = None,
 ) -> openai_pb2.ChatCompletionChunk:
     chunk = openai_pb2.ChatCompletionChunk(
@@ -184,10 +184,12 @@ def chat_chunk_from_delta(
     choice.delta.content = content
     if finish_reason is not None:
         choice.finish_reason = finish_reason
-    if prompt_tokens is not None and completion_tokens is not None:
-        chunk.usage.prompt_tokens = prompt_tokens
+    if completion_tokens is not None:
+        # Only send completion_tokens, not prompt_tokens.
+        # The benchmark uses its own tokenizer for prompt_len, which is more accurate
+        # than our simple whitespace-based tokenization.
         chunk.usage.completion_tokens = completion_tokens
-        chunk.usage.total_tokens = prompt_tokens + completion_tokens
+        chunk.usage.total_tokens = completion_tokens
     return chunk
 
 
