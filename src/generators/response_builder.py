@@ -55,11 +55,11 @@ class ResponseBuilder:
     ) -> dict:
         created = int(time.time())
         # Include usage in final chunk if completion_tokens is provided
-        # This matches OpenAI's stream_options.include_usage behavior
+        # Only include completion_tokens - do NOT include prompt_tokens
+        # because benchmark uses its own tokenizer for prompt_len
         usage = None
         if completion_tokens is not None:
             usage = {
-                "prompt_tokens": 0,  # Not used by benchmark for streaming
                 "completion_tokens": completion_tokens,
                 "total_tokens": completion_tokens,
             }
@@ -118,11 +118,11 @@ class ResponseBuilder:
             finish_reason=finish_reason,
         )
         # Include usage in final chunk if completion_tokens is provided
-        # This matches OpenAI's stream_options.include_usage behavior
+        # Only include completion_tokens - do NOT include prompt_tokens
+        # because benchmark uses its own tokenizer for prompt_len
         usage = None
         if completion_tokens is not None:
             usage = {
-                "prompt_tokens": 0,  # Not used by benchmark for streaming
                 "completion_tokens": completion_tokens,
                 "total_tokens": completion_tokens,
             }
