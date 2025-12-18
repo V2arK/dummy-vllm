@@ -51,8 +51,18 @@ class ResponseBuilder:
         choice_index: int,
         token_text: str,
         finish_reason: Optional[str],
+        completion_tokens: Optional[int] = None,
     ) -> dict:
         created = int(time.time())
+        # Include usage in final chunk if completion_tokens is provided
+        # This matches OpenAI's stream_options.include_usage behavior
+        usage = None
+        if completion_tokens is not None:
+            usage = {
+                "prompt_tokens": 0,  # Not used by benchmark for streaming
+                "completion_tokens": completion_tokens,
+                "total_tokens": completion_tokens,
+            }
         return {
             "id": completion_id,
             "object": "text_completion",
@@ -66,7 +76,7 @@ class ResponseBuilder:
                     "finish_reason": finish_reason,
                 }
             ],
-            "usage": None,
+            "usage": usage,
         }
 
     @staticmethod
@@ -99,6 +109,7 @@ class ResponseBuilder:
         choice_index: int,
         token_text: str,
         finish_reason: Optional[str],
+        completion_tokens: Optional[int] = None,
     ) -> dict:
         created = int(time.time())
         choice = ChatCompletionStreamChoice(
@@ -106,13 +117,22 @@ class ResponseBuilder:
             delta=ChatCompletionMessage(role="assistant", content=token_text),
             finish_reason=finish_reason,
         )
+        # Include usage in final chunk if completion_tokens is provided
+        # This matches OpenAI's stream_options.include_usage behavior
+        usage = None
+        if completion_tokens is not None:
+            usage = {
+                "prompt_tokens": 0,  # Not used by benchmark for streaming
+                "completion_tokens": completion_tokens,
+                "total_tokens": completion_tokens,
+            }
         return {
             "id": completion_id,
             "object": "chat.completion.chunk",
             "created": created,
             "model": model,
             "choices": [choice.model_dump()],
-            "usage": None,
+            "usage": usage,
         }
 
     @staticmethod

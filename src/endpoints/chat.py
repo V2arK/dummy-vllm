@@ -85,12 +85,14 @@ async def _streaming_chat_completion(
                         finish_reason=None,
                     )
                     yield f"data: {json.dumps(chunk, ensure_ascii=False)}\n\n"
+                # Final chunk includes usage information with completion_tokens
                 final_chunk = ResponseBuilder.chat_stream_chunk(
                     completion_id=completion_id,
                     model=request.model,
                     choice_index=choice_index,
                     token_text="",
                     finish_reason="length" if truncated else "stop",
+                    completion_tokens=total_completion_tokens,
                 )
                 yield f"data: {json.dumps(final_chunk, ensure_ascii=False)}\n\n"
             yield "data: [DONE]\n\n"
